@@ -1,0 +1,15 @@
+#!/bin/sh
+
+#
+# Copyright 2002 Sun Microsystems, Inc. All rights reserved.
+# SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+#
+
+BINDIR=`dirname $0`
+. $BINDIR/setenv.sh
+
+PROPS=" -Dcom.sun.enterprise.home=$J2EE_HOME "
+CPATH=$J2EE_HOME/lib/classes:$CPATH
+
+$JAVACMD $PROPS -classpath "$CPATH" com.sun.enterprise.util.J2EECleanup "$@"
+

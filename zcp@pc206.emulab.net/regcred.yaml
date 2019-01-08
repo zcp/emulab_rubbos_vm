@@ -1,0 +1,9 @@
+#create new
+#specify contents of BASE64 encoding above with one line for [.dockerconfigjson] section
+apiVersion: v1
+kind: Secret
+data:
+  .dockerconfigjson: ewoJImF1dGhzIjogewoJCSJteXJlZ2lzdHJ5LmxvY2FsOjUwMDAiOiB7CgkJCSJhdXRoIjogImNtOXZkRG94TWpNME5UWT0iCgkJfQoJfQp9
+metadata:
+  name: regcred
+type: kubernetes.io/dockerconfigjson

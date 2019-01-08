@@ -1,0 +1,25 @@
+
+
+
+create_mysql(){
+     scp -r /home/zcp/database $mysql_host:/tmp
+     ssh $master_host "sudo kubectl create -f webapp/mysql-service.yaml"
+     ssh $master_host "sudo kubectl create -f webapp/mysql-controller.yaml"
+}
+
+
+create_tomcat(){
+    scp -r webapp/tomcat_logs $tomcat_host:/tmp
+    ssh $master_host "sudo kubectl create -f webapp/tomcat-service.yaml"
+    ssh $master_host "sudo kubectl create -f webapp/tomcat-controller.yaml"
+}
+
+create_httpd(){
+    scp -r webapp/httpd-conf $httpd_host:/tmp
+    ssh $master_host "sudo kubectl create -f webapp/httpd-service.yaml"
+    ssh $master_host "sudo kubectl create -f webapp/httpd-controller.yaml"
+}
+
+create_client(){
+    scp -r 
+}

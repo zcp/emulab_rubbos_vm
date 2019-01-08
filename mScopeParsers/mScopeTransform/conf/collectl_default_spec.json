@@ -1,0 +1,3 @@
+{"type":"collectl", "header_row_num":16, "time_index": 1,
+"delimiter":" ", "output_name":"by_node_rsrc_util.csv", 
+"timestamp":"Time_Date", "time_adjustment":"-0400"}

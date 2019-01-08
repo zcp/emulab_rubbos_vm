@@ -1,0 +1,223 @@
+#!/bin/bash
+master_host=zcp@pc265.emulab.net
+client_host=zcp@pc345.emulab.net
+httpd_host=zcp@pc353.emulab.net
+tomcat_host=zcp@pc322.emulab.net
+mysql_host=zcp@pc278.emulab.net
+
+master_ip=155.98.39.65
+client_ip=155.98.39.145
+httpd_ip=155.98.39.153
+tomcat_ip=155.98.39.122
+mysql_ip=155.98.39.78
+
+master_hostname=master.zcp-qv45096.infosphere.emulab.net
+httpd_hostname=httpd.zcp-qv45096.infosphere.emulab.net
+tomcat_hostname=tomcat.zcp-qv45096.infosphere.emulab.net
+mysql_hostname=mysql.zcp-qv45096.infosphere.emulab.net
+client_hostname=client.zcp-qv45096.infosphere.emulab.net
+
+
+
+
+
+
+execution_dir=/tmp/RUBBoS
+rubbos_client_dir=RUBBoS-Client-current
+cur_dir=/users/zcp/webapp
+monitor_dir=/tmp/monitor
+
+run_script=run_rubbos_client.sh
+monitor=collectl.sh
+kill_script=kill_bash.sh
+
+collectl_cpu=$monitor_dir/cpu.txt
+collectl_disk=$monitor_dir/disk.txt
+collectl_mem=$monitor_dir/mem.txt
+collectl_net=$monitor_dir/net.txt
+
+start_monitor(){
+    ssh $httpd_host "sudo $monitor_dir/$monitor $collectl_cpu $collectl_mem $collectl_disk $collectl_net"
+    ssh $tomcat_host "sudo $monitor_dir/$monitor $collectl_cpu $collectl_mem $collectl_disk $collectl_net"
+    ssh $mysql_host "sudo $monitor_dir/$monitor $collectl_cpu $collectl_mem $collectl_disk $collectl_net"
+}
+
+clean_monitor(){
+    ssh $httpd_host "sudo $monitor_dir/$kill_script collectl"
+    ssh $tomcat_host "sudo $monitor_dir/$kill_script collectl"
+    ssh $mysql_host "sudo $monitor_dir/$kill_script collectl"   
+}
+
+copyFiles(){
+   ssh $httpd_host "mkdir -p $monitor_dir"
+   ssh $tomcat_host "mkdir -p $monitor_dir"
+   ssh $mysql_host "mkdir -p $monitor_dir"   
+  
+   cd $cur_dir; cd ..;
+   scp $monitor $kill_script $httpd_host:$monitor_dir
+   scp $monitor $kill_script $tomcat_host:$monitor_dir
+   scp $monitor $kill_script $mysql_host:$monitor_dir   
+
+   scp -r $cur_dir/$rubbos_client_dir $client_host:/tmp
+   scp -r $cur_dir/elba-httpd-2.4-conf $httpd_host:/tmp/httpd-conf
+   scp -r $cur_dir/RUBBoS-Server $tomcat_host:/tmp
+   scp -r $cur_dir/tomcat-logs $tomcat_host:/tmp
+}
+
+delFiles(){
+  ssh $client_host "sudo rm -r /tmp/$rubbos_client_dir;";
+
+  ssh $httpd_host  "sudo rm -r /tmp/httpd-conf; sudo rm -r $monitor_dir";
+  ssh $tomcat_host "sudo rm -r /tmp/RUBBoS-Server; sudo rm -r /tmp/tomcat-logs; sudo rm -r $monitor_dir"
+  ssh $mysql_host "sudo rm -r $monitor_dir";
+  #cd $cur_dir; 
+  sudo rm -r $rubbos_client_dir; sudo rm -r $monitor_dir;
+}
+
+delRCSVC(){
+  kubectl delete rc httpd-controller
+  kubectl delete rc tomcat-controller
+  kubectl delete rc mysql-controller
+  kubectl delete rc rubbos-client-controller
+
+  kubectl delete svc httpd-service
+  kubectl delete svc tomcat-service
+  kubectl delete svc mysql-service
+}
+
+startPods(){
+   cd $cur_dir;
+   kubectl create -f httpd-service.yaml
+   kubectl create -f elba-httpd-controller.yaml
+   kubectl create -f tomcat-service.yaml
+   kubectl create -f tomcat-controller.yaml
+   kubectl create -f mysql-service.yaml
+   kubectl create -f mysql-controller.yaml
+   kubectl create -f rubbos-client-controller.yaml
+   sleep 2m
+}
+
+ready(){
+        error_num=0
+	pods=($(kubectl get pods --namespace $namespace |  awk 'NR>1 { printf sep $3; sep=" "}'))
+	if [ ${#pods[@]} -gt 0 ]; then  # $n is still undefined!
+	    #returns each item as a separate word in pods
+	    for pod in "${pods[@]}"; do
+		if [[ $pod == "Running" ]]; then
+	  	   echo $pod, "Running"
+		else
+                   echo "To sleep"
+                   sleep 30s   
+                   error_num=$(($error_num+1))
+		fi
+	    done
+	fi
+        return $error_num
+}
+
+deploy(){
+    ready
+    error_num=$?
+    echo "error number of pods" $error_num
+    if [[ error_num -gt 0 ]]; then
+       echo "Readying"
+       ready
+    else
+       echo "Ready to run"
+    fi
+    sleep 1m
+}
+
+run(){
+   echo "start collectl on hosts"
+   start_monitor
+   echo "run rubbos client"
+   #startCollectl
+   client_pod=($(kubectl get pods --namespace $namespace -o wide| grep rubbos-client-controller| awk 'NR>0 { printf sep $1; sep=" "}'))
+   echo "rubbos client pod" ${client_pod[0]}
+   if [ ${#client_pod[@]} -gt 0 ]; then
+       echo $execution_dir/$run_script
+       kubectl exec -it ${client_pod[0]} $execution_dir/$run_script
+   else
+      echo "there is no client"
+      return -1
+   fi   
+   echo "clean collectl on hosts"
+   clean_monitor
+}
+
+transFiles(){
+   result_host=$master_host
+   dest_dir=/tmp/results/$storage;
+   ssh $result_host "mkdir -p $dest_dir"
+   ssh $client_host "scp -r /tmp/$rubbos_client_dir/bench $result_host:$dest_dir";
+   ssh $httpd_host  "scp -r /tmp/httpd-conf $result_host:$dest_dir";
+   ssh $tomcat_host "scp -r /tmp/tomcat-logs $result_host:$dest_dir";
+
+   ssh $httpd_host  "scp -r $monitor_dir $result_host:$dest_dir";
+   ssh $tomcat_host "scp -r $monitor_dir $result_host:$dest_dir";
+   ssh $mysql_host  "scp -r $monitor_dir $result_host:$dest_dir";
+
+}
+
+update_workload(){
+  cd $cur_dir
+  sudo rm -r $rubbos_client_dir
+  cp -r RUBBoS-Client $rubbos_client_dir
+
+  cd $rubbos_client_dir/workload;
+  if [ $workload_mode = "browse_only" ]; then
+     cp  browse_only_transitions.txt        user_transitions.txt
+     cp  browse_only_transitions.txt        author_transitions.txt
+     #just for check later
+     cp  browse_only_transitions.txt        ../bench
+  else
+     cp  user_default_transitions.txt       user_transitions.txt
+     cp  author_default_transitions.txt     author_transitions.txt
+     #just for check later
+     cp  user_default_transitions.txt       ../bench
+     cp  author_default_transitions.txt     ../bench
+  fi
+  cd $cur_dir
+  cp $rubbos_client_dir/bench/$workload_property $rubbos_client_dir/Client/rubbos.properties
+  #just for check later
+  cp $rubbos_client_dir/Client/rubbos.properties $rubbos_client_dir/bench
+  
+}
+
+
+namespace=$1
+#transFiles
+
+test(){
+   delFiles
+   for mode in browse_only mix; do
+      #for property in rubbos.properties_100 rubbos.properties_200 rubbos.properties_400 rubbos.properties_600 rubbos.properties_800; do
+      for property in rubbos.properties_100; do
+         storage=$mode-$property
+         workload_mode=$mode
+         workload_property=$property
+         update_workload
+         copyFiles
+         delRCSVC
+         startPods
+         deploy
+         run
+         transFiles
+         delFiles
+         delRCSVC
+      done
+   done
+}
+
+test
+#transFiles
+#echo copy files to hosts
+#delFiles
+#echo cpoy Files
+#copyFiles
+#echo delete files from hosts
+#delFiles
+#start_monitor
+#clean_monitor
+

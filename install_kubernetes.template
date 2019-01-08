@@ -1,0 +1,19 @@
+
+
+install_kube(){
+   
+   sudo apt-get update && apt-get install -y apt-transport-https
+   echo "y" | sudo apt-get install docker.io
+   sudo systemctl stop ufw && sudo systemctl disable ufw
+   sudo systemctl start docker && sudo systemctl enable docker
+   sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add 
+   sudo echo deb http://apt.kubernetes.io/ kubernetes-xenial main >  /etc/apt/sources.list.d/kubernetes.list
+   sudo apt-get update
+   sudo apt-get install -y kubelet kubeadm kubectl kubernetes-cni
+   sudo systemctl restart kubelet && sudo systemctl enable kubelet
+   sudo swapoff -a
+
+#   sudo apt-get install collectl -y
+}
+
+install_kube

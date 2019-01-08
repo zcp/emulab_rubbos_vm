@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: rubbos-client-controller
+spec:
+  replicas: 1
+  selector:
+     app: rubbos-client
+  template:
+     metadata:
+       labels:
+         app: rubbos-client
+     spec:
+       containers:
+       #- image: myregistry.local:5000/rubbos-client:latest
+       - image: wuqingzcp/rubbos-webapp:rubbos-client
+         name: rubbos-client
+         resources:
+           limits:
+             cpu: "0.25"
+             memory: 2Gi
+         volumeMounts:
+           - name: timezone
+             mountPath: /etc/localtime
+           - name: rubbos-client
+             mountPath: /tmp/RUBBoS
+       #nodeSelector:
+       #  diskspeed: slow
+       volumes:
+         - name: timezone
+           hostPath:
+             path: /usr/share/zoneinfo/America/New_York
+         - name: rubbos-client
+           hostPath:
+             path: /tmp/RUBBoS-Client

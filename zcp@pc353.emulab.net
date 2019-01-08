@@ -1,0 +1,55 @@
+#!/bin/bash
+master_host=zcp@pc353.emulab.net
+slave1_host=zcp@pc266.emulab.net
+slave2_host=zcp@pc342.emulab.net
+slave3_host=zcp@pc271.emulab.net
+master_ip=155.98.39.153
+slave1_ip=155.98.39.66
+slave2_ip=155.98.39.142
+slvae3_ip=155.98.39.71
+master_hostname=master.zcp-qv44997.infosphere.emulab.net
+slave1_hostname=slave1.zcp-qv44997.infosphere.emulab.net
+slave2_hostname=slave2.zcp-qv44997.infosphere.emulab.net
+slave3_hostname=slave3.zcp-qv44997.infosphere.emulab.net
+
+
+setLabels(){
+   #kubectl create -f /home/zcp/docker_applications/kube/staging/spark/namespace-spark-cluster.yaml
+   kubectl label nodes $master_hostname diskspeed=master
+   sleep 30s
+   kubectl label nodes $slave1_hostname diskspeed=httpd
+   sleep 30s
+   kubectl label nodes $slave2_hostname diskspeed=tomcat
+   sleep 30s
+   kubectl label nodes $slave3_hostname diskspeed=mysql
+}
+
+activateMaster(){
+    sudo swapoff -a
+    rm -rf /var/lib/cni/flannel/* && rm -rf /var/lib/cni/networks/cbr0/* && ip link delete cni0  
+    rm -rf /var/lib/cni/networks/cni0/*
+    sudo kubeadm reset
+    sudo systemctl restart kubelet
+
+    sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=$master_ip
+    sudo mkdir -p $HOME/.kube
+    sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+    sudo chown $(id -u):$(id -g) $HOME/.kube/config
+    export kubever=$(kubectl version | base64 | tr -d '\n')
+    sudo kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$kubever"
+    #sudo kubectl create -f kube-flannel_eth0.yml 
+}
+
+addNodes(){
+     join_token=$(kubeadm token create --print-join-command)
+     for node in $slave1_host $slave2_host $slave3_host $slave4_host; do
+         ssh $node "rm -rf /var/lib/cni/flannel/* && rm -rf /var/lib/cni/networks/cbr0/* && ip link delete cni0"
+         ssh $node "rm -rf /var/lib/cni/networks/cni0/*"
+         ssh $node  "sudo kubeadm reset; sudo swapoff -a; sudo $join_token"
+     done
+}
+
+
+activateMaster
+addNodes
+setLabels

@@ -1,0 +1,19 @@
+#!/bin/sh
+
+#
+# Copyright 2002 Sun Microsystems, Inc. All rights reserved.
+# SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+#
+
+BINDIR=`dirname $0`
+. $BINDIR/setenv.sh
+
+DH_LIB=$LIBDIR/../help/DeployTool
+
+JAVA_HELP=$LIBDIR/jh.jar
+
+CPATH_CH=$CPATH:$JAVA_HELP:$DH_LIB/deployhelp.jar:$DH_LIB
+
+SYSTEM_PROPERTIES="-Dcom.sun.enterprise.home=$J2EE_HOME"
+ 
+$JAVACMD -classpath "$CPATH_CH" $SYSTEM_PROPERTIES com.sun.enterprise.tools.verifier.Verifier "$@"

@@ -1,0 +1,12 @@
+
+
+#for host in $master_host $slave1_host; do
+    ssh $master_host "sudo ./install_kubernetes.sh" & 
+    ssh $httpd_host "sudo ./install_kubernetes.sh" &
+    ssh $tomcat_host "sudo ./install_kubernetes.sh" &
+    ssh $mysql_host "sudo ./install_kubernetes.sh" &
+    ssh $client_host "sudo ./install_kubernetes.sh"
+
+#done
+
+

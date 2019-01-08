@@ -1,0 +1,4 @@
+
+
+scp -r /home/zcp/database $mysql_host:/tmp
+ssh $master_host "./emulab-run_rubbos.sh"

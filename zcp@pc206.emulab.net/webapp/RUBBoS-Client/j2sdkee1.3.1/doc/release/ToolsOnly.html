@@ -1,0 +1,1474 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=">
+<meta name="LASTUPDATED" content="Tue Jan 08 11:34:52 2002">
+<title>J2EE(TM) SDK Tools</title>
+</head>
+
+<body BGCOLOR="#ffffff" LINK="#666699">
+
+<br>
+
+
+
+<blockquote>
+<h1>
+  <a name="67462"> </a><font color="#666699" face="sans-serif">J2EE<sup><font size="-2">TM</font></sup> SDK Tools</font>
+</h1>
+
+<hr>
+
+<p>
+This page is an appendix from the    
+J2EE<SUP><FONT SIZE="-2">TM</FONT></SUP> Tutorial,
+which is available online at:
+<p>
+<a href="http://java.sun.com/j2ee/tutorial/index.html">
+http://java.sun.com/j2ee/tutorial/index.html</a>
+<p>
+
+<hr>
+<p>
+  <a name="64903"> </a><font ><b>T</b>he J2EE<sup><font size="-2">TM</font></sup> SDK includes a number of  tools, which are described in this appendix.</font>
+</p>
+
+
+<h4>
+  <a name="68693"> </a><font color="#666699" face="sans-serif">In This Appendix</font>
+</h4>
+
+<dl>
+  <dd> <a name="68695"> </a><font face="sans-serif"><a href="ToolsOnly.html#63229">J2EE Administration Tool</a>
+</font>
+  <dd> <a name="68697"> </a><font face="sans-serif"><a href="ToolsOnly.html#63009">Cleanup Tool</a>
+</font>
+  <dd> <a name="68699"> </a><font face="sans-serif"><a href="ToolsOnly.html#63014">Cloudscape Server</a>
+</font>
+  <dl>
+    <dd> <a name="68701"> </a><font face="sans-serif"><a href="ToolsOnly.html#63016">Starting Cloudscape</a>
+</font>
+    <dd> <a name="68703"> </a><font face="sans-serif"><a href="ToolsOnly.html#63024">Stopping Cloudscape</a>
+</font>
+    <dd> <a name="68705"> </a><font face="sans-serif"><a href="ToolsOnly.html#64964">Running the Interactive SQL Tool</a>
+</font>
+    <dd> <a name="68707"> </a><font face="sans-serif"><a href="ToolsOnly.html#64960">Cloudscape Server Configuration</a>
+</font>
+  </dl>
+  <dd> <a name="68709"> </a><font face="sans-serif"><a href="ToolsOnly.html#64621">Deployment Tool</a>
+</font>
+  <dd> <a name="68711"> </a><font face="sans-serif"><a href="ToolsOnly.html#63035">J2EE Server</a>
+</font>
+  <dd> <a name="68713"> </a><font face="sans-serif"><a href="ToolsOnly.html#63053">Key Tool</a>
+</font>
+  <dd> <a name="68715"> </a><font face="sans-serif"><a href="ToolsOnly.html#63055">Packager Tool</a>
+</font>
+  <dl>
+    <dd> <a name="68717"> </a><font face="sans-serif"><a href="ToolsOnly.html#63061">EJB JAR File</a>
+</font>
+    <dd> <a name="68719"> </a><font face="sans-serif"><a href="ToolsOnly.html#63069">Web Application WAR File</a>
+</font>
+    <dd> <a name="68721"> </a><font face="sans-serif"><a href="ToolsOnly.html#63087">Application Client JAR File</a>
+</font>
+    <dd> <a name="68723"> </a><font face="sans-serif"><a href="ToolsOnly.html#63093">J2EE Application EAR File</a>
+</font>
+    <dd> <a name="68725"> </a><font face="sans-serif"><a href="ToolsOnly.html#63100">Specifying the Runtime Deployment Descriptor</a>
+</font>
+    <dd> <a name="68727"> </a><font face="sans-serif"><a href="ToolsOnly.html#63108">Resource Adapter RAR File</a>
+</font>
+  </dl>
+  <dd> <a name="68729"> </a><font face="sans-serif"><a href="ToolsOnly.html#63112">Realm Tool</a>
+</font>
+  <dl>
+    <dd> <a name="68731"> </a><font face="sans-serif"><a href="ToolsOnly.html#65194">Examples</a>
+</font>
+  </dl>
+  <dd> <a name="68733"> </a><font face="sans-serif"><a href="ToolsOnly.html#65195">runclient Script</a>
+</font>
+  <dl>
+    <dd> <a name="68735"> </a><font face="sans-serif"><a href="ToolsOnly.html#65371">Syntax</a>
+</font>
+    <dd> <a name="68737"> </a><font face="sans-serif"><a href="ToolsOnly.html#65947">Example</a>
+</font>
+    <dd> <a name="68739"> </a><font face="sans-serif"><a href="ToolsOnly.html#65815">Accessing a Remote Server</a>
+</font>
+    <dd> <a name="68741"> </a><font face="sans-serif"><a href="ToolsOnly.html#68583">Preventing the User Name and Password Prompts</a>
+</font>
+  </dl>
+  <dd> <a name="68743"> </a><font face="sans-serif"><a href="ToolsOnly.html#65833">Verifier Tool</a>
+</font>
+  <dl>
+    <dd> <a name="68745"> </a><font face="sans-serif"><a href="ToolsOnly.html#63162">Command-Line Verifier</a>
+</font>
+    <dd> <a name="68747"> </a><font face="sans-serif"><a href="ToolsOnly.html#63180">Stand-Alone GUI Verifier</a>
+</font>
+  </dl>
+</dl>
+
+<h2>
+  <a name="63229"> </a><font color="#666699" face="sans-serif">J2EE Administration Tool</font>
+</h2>
+
+
+<p>
+  <a name="62912"> </a><font >The <code>j2eeadmin</code> tool is a command-line script that enables you to add and remove these resources: JDBC<sup><font size="-2">TM</font></sup> drivers and data sources, JMS destinations and connection factories, and resource adapter connection factories.<p></p>
+<table border="1" cellpadding="5" cellspacing="0">
+  <caption align=left><b><font face=""><a name="63370"> </a>Table 2    j2eeadmin tool Options&nbsp;</font></b></caption>
+  <tr align="center" bgcolor="#CCCCCC">
+    <th><font face="" color="#666699">
+<a name="63374"> </a><font >Option<br></font>
+
+</font></th>
+    <th><font face="" color="#666699">
+<a name="63376"> </a><font >Description<br></font>
+
+</font></th>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="63378"> </a><font ><code>-addConnectorFactory</code><br></font>
+
+
+<a name="66594"> </a><font ><i>&lt;jndi-name&gt;</i><br></font>
+
+
+<a name="66596"> </a><font ><code>[</code><i>&lt;app-name&gt;</i><code>:]</code><br></font>
+
+
+<a name="66598"> </a><font ><i>&lt;rar-filename&gt;</i><code> </code><br></font>
+
+
+<a name="66600"> </a><font ><code>[</code><i>&lt;xa-user-name&gt;</i><code> </code><br></font>
+
+
+<a name="66602"> </a><font ><i>&lt;xa-password&gt;</i><code>] </code><br></font>
+
+
+<a name="66604"> </a><font ><code>[-props </code><br></font>
+
+
+<a name="68110"> </a><font ><code>(</code><i>&lt;name&gt;</i><code>=</code><i>&lt;value&gt;</i><code>)+]</code><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="63420"> </a><font >Adds a connection factory with the specified <i>&lt;jndi-name&gt;</i>. The connection factory is contained in the RAR file specified by <i>&lt;rar-filename&gt;</i>. The <i>&lt;rar-filename&gt;</i> must be the base name of the file; it cannot include any prefix ending in / (UNIX) or \ (Windows). If the RAR file is contained in an EAR file, then the name of the J2EE application name must be specified by <i>&lt;app-name&gt;</i>, followed by a colon. Optionally, a user name and password for the factory may be specified. Also optional is the <code>-props</code> flag, followed by one or more name-value pairs that specify properties for this factory. To prevent the shell from interpreting characters in the values, enclose the values in single or double quotes.<br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="63382"> </a><font ><code>-addJdbcDriver </code><br></font>
+
+
+<a name="66606"> </a><font ><i>&lt;class-name&gt;</i><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="63384"> </a><font >Adds the JDBC driver specified by its fullyqualified <i>&lt;class-name&gt;</i>. You must also update the <code>J2EE_CLASSPATH</code> environment variable in the file <code>bin\userconfig.bat</code>. Then you must restart the J2EE server.<br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="63386"> </a><font ><code>-addJdbcDatasource</code><br></font>
+
+
+<a name="66608"> </a><font ><i>&lt;jndi-name&gt;</i><code> </code><i>&lt;url&gt;</i><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="63388"> </a><font >Adds the JDBC <code>DataSource</code> with the specified <i>&lt;jndi-name&gt;</i> and <i>&lt;url&gt;</i>.<br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="63390"> </a><font ><code>-addJdbcXADatasource</code><br></font>
+
+
+<a name="66610"> </a><font ><i>&lt;jndi-name&gt;</i><code> </code><br></font>
+
+
+<a name="66612"> </a><font ><i>&lt;class-name&gt;</i><code> </code><br></font>
+
+
+<a name="66614"> </a><font ><code>[</code><i>&lt;xa-user-name&gt;</i><code> </code><br></font>
+
+
+<a name="66616"> </a><font ><i>&lt;xa-password&gt;</i><code>] </code><br></font>
+
+
+<a name="66618"> </a><font ><code>[-props</code><br></font>
+
+
+<a name="68232"> </a><font ><i>&lt;name&gt;</i><code>=</code><i>&lt;value&gt;</i><code>)+]</code><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="63392"> </a><font >Adds the JDBC <code>XADataSource</code> with the specified <i>&lt;jndi-name&gt;</i> and fully-qualified <i>&lt;class-name&gt;</i>. Optionally, a user name and password for the <code>DataSource</code> may be specified. Also optional is the <code>-props</code> flag, followed by one or more name-value pairs that specify properties for this <code>DataSource</code>.<br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="63394"> </a><font ><code>-addJmsDestination</code><br></font>
+
+
+<a name="66620"> </a><font ><i>&lt;jndi-name&gt;</i><br></font>
+
+
+<a name="66622"> </a><font ><code>(queue|topic)</code><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="63396"> </a><font >Adds a JMS destination with the specified <i>&lt;jndi-name&gt;</i> and declares the destination as either a <code>queue</code> or <code>topic</code>.<br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="63398"> </a><font ><code>-addJmsFactory </code><br></font>
+
+
+<a name="66624"> </a><font ><i>&lt;jndi-name&gt;</i><br></font>
+
+
+<a name="66626"> </a><font ><code>(queue|topic)</code><br></font>
+
+
+<a name="66628"> </a><font ><code>[-props</code><br></font>
+
+
+<a name="68233"> </a><font ><code>(</code><i>&lt;name&gt;</i><code>=</code><i>&lt;value&gt;</i><code>)+]</code><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="63400"> </a><font >Adds a JMS connection factory with the specified <i>&lt;jndi-name&gt;</i> and destination type, either queue or topic. Optionally, one or more properties may be specified with name-value pairs. <br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="63402"> </a><font ><code>-list</code><i>&lt;resource-type&gt;</i><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="63404"> </a><font >Lists resources of the specified <i>&lt;resource-type&gt;</i>, either <code>ConnectorFactory</code>, <code>JdbcDriver</code>, <code>JdbcDatasource</code>, <code>JdbcXADatasource</code>, <code>JmsDestination</code>, or <code>JmsFactory</code>. There is no space between <code>-list</code> and <i>&lt;resource-type&gt;</i>.<br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="63406"> </a><font ><code>-remove</code><i>&lt;resource-type&gt;</i><br></font>
+
+
+<a name="66630"> </a><font ><i>&lt;jndi-name&gt;</i><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="63408"> </a><font >Removes the resource of the specified <i>&lt;resource-type&gt;</i> and <i>&lt;jndi-name&gt;</i>. (See the description of <code>-list</code> for the allowed <i>&lt;resource-type&gt;</i> elements.)<br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="63410"> </a><font ><code>-removeAll</code><i>&lt;resource-type&gt;</i><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="63412"> </a><font >Removes all resources of the specified <i>&lt;resource-type&gt;</i>. (See the description of <code>-list</code> for the allowed <i>&lt;resource-type&gt;</i> elements.)<br></font>
+
+</font></td>
+  </tr>
+</table>
+
+
+
+</font>
+</p>
+
+
+<h2>
+  <a name="63009"> </a><font color="#666699" face="sans-serif">Cleanup Tool</font>
+</h2>
+
+
+<p>
+  <a name="63542"> </a><font >The <code>cleanup</code> tool is a command-line script that removes all deployed applications from your J2EE server. It will not delete the component files (JAR, WAR, EAR). </font>
+</p>
+
+<hr>
+
+<a name="63012"> </a><font >Note:  Use this utility with care!<br></font>
+
+<hr>
+
+<h2>
+  <a name="63014"> </a><font color="#666699" face="sans-serif">Cloudscape Server</font>
+</h2>
+
+
+<p>
+  <a name="63015"> </a><font >The examples in this manual have been tested with the Cloudscape DBMS, which is included in the J2EE SDK.</font>
+</p>
+
+
+<h3>
+  <a name="63016"> </a><font color="#666699" face="sans-serif">Starting Cloudscape</font>
+</h3>
+
+
+<p>
+  <a name="63017"> </a><font >Before your enterprise beans can access a Cloudscape database, you must run the Cloudscape server from the command line:</font>
+</p>
+
+<blockquote><pre>
+cloudscape -start
+<a name="63018"> </a>
+</pre></blockquote>
+
+<p>
+  <a name="63019"> </a><font >You should see output similar to the following:</font>
+</p>
+
+<blockquote><pre>
+Mon Aug 09 11:50:30 PDT 1999: [RmiJdbc]
+
+COM.cloudscape.core.JDBCDriver registered in DriverManager
+
+Mon Aug 09 11:50:30 PDT 1999: [RmiJdbc] Binding . . ..
+
+Mon Aug 09 11:50:30 PDT 1999: [RmiJdbc] No installation of
+
+RMI Security Manager...
+
+Mon Aug 09 11:50:31 PDT 1999: [RmiJdbc] RmiJdbcServer
+
+bound in rmi registry 
+<a name="63020"> </a>
+</pre></blockquote>
+
+<h3>
+  <a name="63024"> </a><font color="#666699" face="sans-serif">Stopping Cloudscape</font>
+</h3>
+
+
+<p>
+  <a name="64957"> </a><font >To stop the server type the following command:</font>
+</p>
+
+<blockquote><pre>
+cloudscape -stop
+<a name="63025"> </a>
+</pre></blockquote>
+
+<p>
+  <a name="63026"> </a><font >You should see output similar to the following:</font>
+</p>
+
+<blockquote><pre>
+Attempting to shutdown RmiJdbc server
+
+RmiJdbc Server RmiAddr is: //buzz/RmiJdbcServer
+
+WARNING: Shutdown was successful! 
+<a name="63027"> </a>
+</pre></blockquote>
+<hr>
+
+<a name="63030"> </a><font >Note:  If you stop the server with Control-c, files will not be closed properly. When the server is started the next time, it must perform recovery by rolling back noncommitted transactions and possibly applying the forward log.<br></font>
+
+<hr>
+
+<h3>
+  <a name="64964"> </a><font color="#666699" face="sans-serif">Running the Interactive SQL Tool</font>
+</h3>
+
+
+<p>
+  <a name="64965"> </a><font >The Cloudscape product includes a text-based, interactive tool called <code>ij</code>. (This tool is not supported by Sun Microsystems, Inc.) You can run the <code>ij</code> tool by typing this command:</font>
+</p>
+
+<blockquote><pre>
+cloudscape -isql
+<a name="64966"> </a>
+</pre></blockquote>
+
+<p>
+  <a name="65003"> </a><font >Within the tool, each command you type must end in a semicolon. The commands in the next example display all rows from the <code>orders</code> table, execute a SQL script named <code>myscript.sql</code>, and end the tool session:</font>
+</p>
+
+<blockquote><pre>
+ij&gt; select * from orders;
+
+ij&gt; run 'myscript.sql';
+
+ij&gt; exit;
+<a name="64983"> </a>
+</pre></blockquote>
+
+<p>
+  <a name="63031"> </a><font >The following example runs a SQL script from the command line:</font>
+</p>
+
+<blockquote><pre>
+cloudscape -isql &lt; myscript.sql
+<a name="64977"> </a>
+</pre></blockquote>
+
+<p>
+  <a name="64978"> </a><font >This command lists the names of all user tables in the database:</font>
+</p>
+
+<blockquote><pre>
+ij&gt; select tablename from sys.systables
+
+    where tabletype = 'T';
+<a name="65581"> </a>
+</pre></blockquote>
+
+<p>
+  <a name="65592"> </a><font >The next example displays the column names of the <code>orders</code> table:</font>
+</p>
+
+<blockquote><pre>
+ij&gt; select columnname from sys.syscolumns
+
+    where referenceid =
+
+          (select tableid from sys.systables
+
+           where tablename = 'orders');
+<a name="65585"> </a>
+</pre></blockquote>
+
+<p>
+  <a name="65591"> </a><font >Before you deploy an entity bean with container-managed persistence, you use   <code>deploytool</code> to generate the bean's SQL statements. Because the table names in these SQL statements are case sensitive, you must enclose them in double quotes:</font>
+</p>
+
+<blockquote><pre>
+ij&gt; select * from "TeamBeanTable";
+<a name="65604"> </a>
+</pre></blockquote>
+
+<p>
+  <a name="65580"> </a><font >For more information on the <code>ij</code> tool, please refer to the online documentation on the Cloudscape Web site:</font>
+</p>
+
+<blockquote><pre>
+http://www.cloudscape.com
+<a name="64995"> </a>
+</pre></blockquote>
+
+<h3>
+  <a name="64960"> </a><font color="#666699" face="sans-serif">Cloudscape Server Configuration</font>
+</h3>
+
+
+<p>
+  <a name="63032"> </a><font >The default database used by the Cloudscape server is named <code>CloudscapeDB</code>. This database will reside in the <code>cloudscape</code> directory of your J2EE SDK installation. The <code>CloudscapeDB</code> database will be created automatically the first time it is accessed. The driver for the Cloudscape server is already configured in the <code>config/default.properties</code> file. No further changes by you are necessary.</font>
+</p>
+
+
+<h2>
+  <a name="64621"> </a><font color="#666699" face="sans-serif">Deployment Tool</font>
+</h2>
+
+
+<p>
+  <a name="64622"> </a><font >The <code>deploytool</code> utility has two versions: GUI and command line.  The GUI version enables you to package components and to deploy applications. If you run the <code>deploytool</code> script with no options, the GUI version is launched. </font>
+</p>
+
+
+<p>
+  <a name="64840"> </a><font >The GUI version includes online help information that is context sensitive. To access a help topic for a particular dialog box or tab , press F1.</font>
+</p>
+
+
+<p>
+  <a name="64844"> </a><font >The command-line version of the tool enables you to deploy and undeploy applications. To package components from the command line, use the <code>packager</code> tool.<p></p>
+<table border="1" cellpadding="5" cellspacing="0">
+  <caption align=left><b><font face=""><a name="64850"> </a>Table 3    deploytool Options&nbsp;</font></b></caption>
+  <tr align="center" bgcolor="#CCCCCC">
+    <th><font face="" color="#666699">
+<a name="64854"> </a><font >Option<br></font>
+
+</font></th>
+    <th><font face="" color="#666699">
+<a name="64856"> </a><font >Description<br></font>
+
+</font></th>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="64858"> </a><font ><code>-deploy </code><br></font>
+
+
+<a name="68238"> </a><font ><i>&lt;</i><i>ear-filename</i><i>&gt;</i><br></font>
+
+
+<a name="66648"> </a><font ><i>&lt;server-name&gt;</i><br></font>
+
+
+<a name="66650"> </a><font ><code>[</code><i>&lt;client-stub-jar&gt;</i><code>]</code><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="64860"> </a><font >Deploys the J2EE application contained in the EAR file specified by <i>&lt;ear-filename&gt;</i> onto the J2EE server running on the machine specified by <i>&lt;server-name&gt;</i>. Optionally, a JAR file for a stand-alone Java application client may be created by specifying <i>&lt;client-stub-jar&gt;</i>.<br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="64862"> </a><font ><code>-deployConnector</code><br></font>
+
+
+<a name="66764"> </a><font ><i>&lt;rar-filename&gt;</i><code> </code><br></font>
+
+
+<a name="68234"> </a><font ><i>&lt;server-name&gt;</i><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="64864"> </a><font >Deploys the resource adapter contained in the RAR file specified by <i>&lt;rar-filename&gt;</i> onto the J2EE server running on the machine specified by <i>&lt;server-name&gt;</i>.<br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="68531"> </a><font ><code>-generateSQL</code><br></font>
+
+
+<a name="68536"> </a><font ><i>&lt;ear-filename&gt;</i><br></font>
+
+
+<a name="68537"> </a><font ><i>&lt;server-name&gt;</i><br></font>
+
+
+<a name="68534"> </a><font ><code>[noOverWrite]</code><br></font>
+
+
+<a name="68561"> </a><font ><br></font>
+
+
+<a name="68562"> </a><font ><br><br></font>
+
+
+<a name="68563"> </a><font ><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="68533"> </a><font >Generates SQL statements for all entity beans with container-managed persistence. These beans are in the EAR file specified by <i>&lt;ear-filename&gt;</i> that has been deployed on the J2EE server running on the machine specified by <i>&lt;server-name&gt;</i>. If the <code>noOverWrite</code> option is specified, then existing SQL statements are not overwritten.<br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="64866"> </a><font ><code>-listApps </code><br></font>
+
+
+<a name="68236"> </a><font ><i>&lt;server-name&gt;</i><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="64868"> </a><font >Lists the J2EE applications that are deployed on the J2EE server running on the machine specified by <i>&lt;server-name&gt;</i>. <br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="64870"> </a><font ><code>-listConnectors </code><br></font>
+
+
+<a name="68235"> </a><font ><i>&lt;server-name&gt;</i><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="64872"> </a><font >Lists the resource adapters that are deployed on the J2EE server running on the machine specified by <i>&lt;server-name&gt;</i>.<br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="64874"> </a><font ><code>-undeployConnector</code><br></font>
+
+
+<a name="66658"> </a><font ><i>&lt;rar-filename&gt;</i><code> </code><br></font>
+
+
+<a name="66660"> </a><font ><i>&lt;server-name&gt;</i><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="64876"> </a><font >Undeploys the resource adapter contained in the file specified by <i>&lt;rar-filename&gt;</i> from the J2EE server running on the machine specified by <i>&lt;server-name&gt;</i>. <br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="64878"> </a><font ><code>-uninstall </code><br></font>
+
+
+<a name="68237"> </a><font ><i>&lt;app-name&gt;</i><br></font>
+
+
+<a name="66664"> </a><font ><i>&lt;server-name&gt;</i><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="64880"> </a><font >Undeploys the J2EE application whose name is <i>&lt;app-name&gt;</i> from the J2EE server running on the machine specified by <i>&lt;server-name&gt;</i>. <br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="64882"> </a><font ><code>-help</code><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="64884"> </a><font >Displays options.<br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="64886"> </a><font ><code>-ui</code><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="64888"> </a><font >Runs the GUI version (default).<br></font>
+
+</font></td>
+  </tr>
+</table>
+
+
+
+</font>
+</p>
+
+
+<h2>
+  <a name="63035"> </a><font color="#666699" face="sans-serif">J2EE Server</font>
+</h2>
+
+
+<p>
+  <a name="63036"> </a><font >To launch the J2EE server, run the <code>j2ee</code> script from the command-line prompt. <p></p>
+<table border="1" cellpadding="5" cellspacing="0">
+  <caption align=left><b><font face=""><a name="63736"> </a>Table 4    j2ee Options&nbsp;</font></b></caption>
+  <tr align="center" bgcolor="#CCCCCC">
+    <th><font face="" color="#666699">
+<a name="63740"> </a><font >Option<br></font>
+
+</font></th>
+    <th><font face="" color="#666699">
+<a name="63742"> </a><font >Description<br></font>
+
+</font></th>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="63744"> </a><font ><code>-verbose </code><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="63746"> </a><font >Redirects all logging output to the current shell.<br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="63748"> </a><font ><code>-version</code><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="63750"> </a><font >Displays the version number.<br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="63752"> </a><font ><code>-stop </code><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="63754"> </a><font >Stops the J2EE server.<br></font>
+
+</font></td>
+  </tr>
+</table>
+
+
+
+</font>
+</p>
+
+
+<p>
+  <a name="63052"> </a><font >To run the HTTPS service of the J2EE server, you must install a server certificate. For instructions, see the Security chapter of the J2EE Tutorial.</font>
+</p>
+
+
+<h2>
+  <a name="63053"> </a><font color="#666699" face="sans-serif">Key Tool</font>
+</h2>
+
+
+<p>
+  <a name="63054"> </a><font >The <code>keytool</code> utility creates public and private keys and generates X.509 self-signed certificates. The J2EE SDK version of the <code>keytool</code> utility has the same options as the version distributed with the J2SE SDK. For more information, see  the J2EE SDK Configuration Guide.</font>
+</p>
+
+
+<h2>
+  <a name="63055"> </a><font color="#666699" face="sans-serif">Packager Tool</font>
+</h2>
+
+
+<p>
+  <a name="63056"> </a><font >The <code>packager</code> tool is a command-line script that enables you to package J2EE components. This tool is for advanced users who do not want to use <code>deploytool</code> to package J2EE components. With <code>packager</code>, you can create the following component packages:</font>
+</p>
+
+<ul>
+  <font ><li ><a name="64555"> </a>EJB JAR file</font>
+  <font ><li ><a name="64556"> </a>Web application WAR file</font>
+  <font ><li ><a name="64557"> </a>Application client JAR file</font>
+  <font ><li ><a name="64559"> </a>J2EE application EAR file</font>
+  <font ><li ><a name="64558"> </a>Resource adapter RAR file</font>
+</ul>
+
+<p>
+  <a name="65024"> </a><font >The <code>packager</code> tool also enables you to set the runtime deployment information of an application EAR file.</font>
+</p>
+
+<hr>
+
+<a name="63800"> </a><font >Note:  To make them easier to read, the examples that follow contain line breaks within the commands. When typing these commands, do not include the line breaks.<br></font>
+
+<hr>
+
+<h3>
+  <a name="63061"> </a><font color="#666699" face="sans-serif">EJB JAR File</font>
+</h3>
+
+
+<h4>
+  <a name="63062"> </a><font color="#666699" face="sans-serif">Syntax</font>
+</h4>
+
+<blockquote><pre>
+packager -ejbJar <i>&lt;</i><i>root-directory</i><i>&gt;</i> <i>&lt;file-list&gt;</i> 
+
+<i>&lt;ejb-dd&gt;</i> <i>&lt;ejb-jar&gt;
+</i><a name="63063"> </a>
+</pre></blockquote>
+
+<h4>
+  <a name="63064"> </a><font color="#666699" face="sans-serif">Example</font>
+</h4>
+
+
+<p>
+  <a name="63065"> </a><font >The following command packages the three <code>Hello</code> classes and the<code> hello-jar.xml</code> deployment descriptor into the <code>HelloEJB.jar</code> file:</font>
+</p>
+
+<blockquote><pre>
+packager -ejbJar /home/duke/classes/
+
+HelloHome.class:HelloEJB.class:HelloRemote.class
+
+hello-jar.xml HelloEJB.jar 
+<a name="63066"> </a>
+</pre></blockquote>
+
+<h3>
+  <a name="63069"> </a><font color="#666699" face="sans-serif">Web Application WAR File</font>
+</h3>
+
+
+<h4>
+  <a name="65049"> </a><font color="#666699" face="sans-serif">Syntax</font>
+</h4>
+
+<blockquote><pre>
+packager -webArchive 
+
+[-classpath <i>&lt;root-directory&gt;</i> [-classFiles <i>&lt;file-list&gt;</i>]] 
+
+<i>&lt;content-root&gt;</i> [-contentFiles <i>&lt;file-list&gt;</i>] <i>&lt;web-dd&gt;</i> <i>&lt;web-war&gt;
+</i><a name="65050"> </a>
+</pre></blockquote>
+
+<h4>
+  <a name="63072"> </a><font color="#666699" face="sans-serif">Example</font>
+</h4>
+
+
+<p>
+  <a name="63073"> </a><font >The following command packages helper classes and JSP<sup><font size="-2">TM</font></sup> pages into the <code>bookstore2.war</code> file:</font>
+</p>
+
+<blockquote><pre>
+packager -webArchive -classpath .
+
+-classFiles
+
+   cart\ShoppingCart.class:cart\ShoppingCartItem.class:
+
+   database\BookDB.class:util\Currency.class
+
+.
+
+-contentFiles
+
+   banner.jsp:bookdetails.jsp:bookstore.jsp:cashier.jsp:
+
+   catalog.jsp:DigitalClock.class:duke.books.gif:
+
+   errorpage.jsp:initdestroy.jsp:receipt.jsp:showcart.jsp
+
+web.xml bookstore2.war
+<a name="63086"> </a>
+</pre></blockquote>
+
+<h3>
+  <a name="63087"> </a><font color="#666699" face="sans-serif">Application Client JAR File</font>
+</h3>
+
+
+<h4>
+  <a name="63088"> </a><font color="#666699" face="sans-serif">Syntax</font>
+</h4>
+
+<blockquote><pre>
+packager -applicationClient <i>&lt;root-directory&gt;</i> <i>&lt;file-list&gt;
+
+&lt;main-class&gt;</i> <i>&lt;appclient-dd&gt;</i> <i>&lt;appclient-jar&gt;
+</i><a name="63089"> </a>
+</pre></blockquote>
+
+<h4>
+  <a name="63090"> </a><font color="#666699" face="sans-serif">Example</font>
+</h4>
+
+
+<p>
+  <a name="63091"> </a><font >The following command creates the <code>appClient.jar</code> file:</font>
+</p>
+
+<blockquote><pre>
+packager  -applicationClient classes 
+
+hola:hello/HelloUtil.class 
+
+package.Main client.xml appClient.jar
+<a name="63092"> </a>
+</pre></blockquote>
+
+<h3>
+  <a name="63093"> </a><font color="#666699" face="sans-serif">J2EE Application EAR File</font>
+</h3>
+
+
+<h4>
+  <a name="63094"> </a><font color="#666699" face="sans-serif">Syntax</font>
+</h4>
+
+<blockquote><pre>
+packager -enterpriseArchive <i>&lt;file-only-list&gt;</i> 
+
+[-alternativeDescriptorEntries <i>&lt;file-only-list&gt;</i>]
+
+[-libraryJars <i>&lt;</i><i>file-list&gt;</i>]<i> &lt;app-name&gt; &lt;app-ear&gt;
+</i><a name="63095"> </a>
+</pre></blockquote>
+
+<h4>
+  <a name="63096"> </a><font color="#666699" face="sans-serif">Example</font>
+</h4>
+
+
+<p>
+  <a name="63097"> </a><font >In the following command, the optional <code>-alternativeDescriptorEntries</code> flag allows you to specify the external descriptor entry name of each component as you wish it to appear in the EAR file: </font>
+</p>
+
+<blockquote><pre>
+packager -enterpriseArchive
+
+myWeb.war:myEJB.jar:appClient.ear 
+
+-alternativeDescriptorEntries 
+
+myWeb/web.xml:myEjb/myEjb.xml:client/client.xml 
+
+myAppName myApp.ear 
+<a name="63098"> </a>
+</pre></blockquote>
+
+<h3>
+  <a name="63100"> </a><font color="#666699" face="sans-serif">Specifying the Runtime Deployment Descriptor</font>
+</h3>
+
+
+<p>
+  <a name="63823"> </a><font >The preceding example specified the <code>-enterpriseArchive</code> flag to create a portable J2EE application EAR file. This file is portable because you can import it into any J2EE environment that conforms to the J2EE Specification. Although you can import the file into the <code>deploytool</code>, you cannot deploy it on the J2EE server until it contains a runtime deployment descriptor. This deployment descriptor is an XML file that contains information such as the JNDI names of the application's enterprise beans.</font>
+</p>
+
+
+<h4>
+  <a name="65076"> </a><font color="#666699" face="sans-serif">Syntax</font>
+</h4>
+
+<blockquote><pre>
+packager -setRuntime <i>&lt;app-ear&gt;</i>|<i>&lt;appclient-jar&gt;</i> <i>&lt;runtime.xml&gt;</i> 
+
+[-o <i>&lt;output-file&gt;</i>]
+<a name="65077"> </a>
+</pre></blockquote>
+
+<h4>
+  <a name="65078"> </a><font color="#666699" face="sans-serif">Example</font>
+</h4>
+
+
+<p>
+  <a name="63102"> </a><font >In the following command, the <code>-setRuntime</code> flag instructs <code>packager</code> to insert the runtime deployment descriptor (<code>sun-j2ee-ri.xml</code>) into the <code>myApp.ear</code> file:</font>
+</p>
+
+<blockquote><pre>
+packager -setRuntime MyApp.ear sun-j2ee-ri.xml
+<a name="63103"> </a>
+</pre></blockquote>
+
+<p>
+  <a name="63104"> </a><font >The following command copies <code>MyApp.ear</code> to <code>OtherApp.ear</code>, inserts the deployment descriptor into the <code>OtherApp.ear</code> file, and leaves <code>MyApp.ear</code> unchanged:</font>
+</p>
+
+<blockquote><pre>
+packager -setRuntime MyApp.ear sun-j2ee-ri.xml -o OtherApp.ear
+<a name="65098"> </a>
+</pre></blockquote>
+
+<p>
+  <a name="65080"> </a><font >To obtain an example of the runtime deployment descriptor, extract it from an EAR file that you've already deployed:</font>
+</p>
+
+<blockquote><pre>
+jar -xvf SomeApp.ear
+<a name="63105"> </a>
+</pre></blockquote>
+
+<p>
+  <a name="63106"> </a><font >The DTD of the runtime deployment descriptor is in the <code>lib/dtds/sun-j2ee-ri-dtd</code> file of your J2EE SDK installation.</font>
+</p>
+
+<hr>
+
+<a name="63835"> </a><font >Note:  The runtime deployment descriptor (<code>sun-j2ee-ri-</code><i>&lt;version&gt;</i><code>.xml</code>) is not required by the J2EE Specification. This descriptor is unique to the J2EE SDK and may change in future releases.<br></font>
+
+<hr>
+
+<h3>
+  <a name="63108"> </a><font color="#666699" face="sans-serif">Resource Adapter RAR File</font>
+</h3>
+
+
+<h4>
+  <a name="68281"> </a><font color="#666699" face="sans-serif">Syntax</font>
+</h4>
+
+<blockquote><pre>
+packager -connector <i>&lt;root-directory&gt;</i> <i>&lt;</i><i>file-list</i><i>&gt;</i> 
+
+ra.xml myConnector.rar
+<a name="68283"> </a>
+</pre></blockquote>
+
+<h4>
+  <a name="68284"> </a><font color="#666699" face="sans-serif">Example</font>
+</h4>
+
+
+<p>
+  <a name="65120"> </a><font >In this example, the <code>jar</code> command packages the files under the <code>com</code> directory into <code>myfiles.jar</code>. The packager command creates a RAR file named <code>theConnector.rar</code> that contains <code>myfiles.jar</code> and the <code>myra.xml</code> deployment descriptor:</font>
+</p>
+
+<blockquote><pre>
+jar -cvf myadapter.jar com
+
+packager -connector . myadapter.jar myra.xml theConnector.rar
+<a name="65129"> </a>
+</pre></blockquote>
+
+<h2>
+  <a name="63112"> </a><font color="#666699" face="sans-serif">Realm Tool</font>
+</h2>
+
+
+<p>
+  <a name="65153"> </a><font >The <code>realmtool</code> utility is a command-line script that enables you to add and remove J2EE users and to import certificate files. <p></p>
+<table border="1" cellpadding="5" cellspacing="0">
+  <caption align=left><b><font face=""><a name="65159"> </a>Table 5    realmtool Options&nbsp;</font></b></caption>
+  <tr align="center" bgcolor="#CCCCCC">
+    <th><font face="" color="#666699">
+<a name="65163"> </a><font >Option<br></font>
+
+</font></th>
+    <th><font face="" color="#666699">
+<a name="65165"> </a><font >Description<br></font>
+
+</font></th>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="65167"> </a><font ><code>-show</code><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="65169"> </a><font >Lists the realm names.<br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="65171"> </a><font ><code>-list </code><i>&lt;r</i><i>ealm-name</i><i>&gt;</i><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="65173"> </a><font >Lists the users in the specified realm. This release has two realms: <code>default</code> and <code>certificate</code>.<br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="68524"> </a><font ><code>-listGroups</code><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="68526"> </a><font >Lists the groups in the <code>default</code> realm.<br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="68520"> </a><font ><code>-userGroups</code> <i>&lt;user-name&gt;</i><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="68522"> </a><font >Lists the groups in the <code>default</code> realm to which the specified user belongs.<br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="65175"> </a><font ><code>-add &lt;</code><i>user-name password</i><code> </code><br></font>
+
+
+<a name="66693"> </a><font ><i>group</i><code>[,</code><i>group</i><code>]&gt;</code><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="65177"> </a><font >Adds the specified user to the <code>default</code> realm.<br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="65179"> </a><font ><code>-addGroup </code><i>&lt;group&gt;</i><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="65181"> </a><font >Adds a group to the <code>default</code> realm.<br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="65183"> </a><font ><code>-import </code><i>&lt;certificate-file&gt;</i><code> </code><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="65185"> </a><font >Adds a user to the <code>certificate</code> realm by importing a file containing an X.509 certificate.<br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="65187"> </a><font ><code>-remove </code><i>&lt;realm-name user-name&gt;</i><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="65189"> </a><font >Removes a user from the specified realm.<br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="65191"> </a><font ><code>-removeGroup </code><i>&lt;</i><i>group</i><i>&gt;</i><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="65193"> </a><font >Removes a group. <br></font>
+
+</font></td>
+  </tr>
+</table>
+
+
+
+</font>
+</p>
+
+
+<h3>
+  <a name="65194"> </a><font color="#666699" face="sans-serif">Examples</font>
+</h3>
+
+
+<p>
+  <a name="65201"> </a><font >To display all users in the default realm, type this command:</font>
+</p>
+
+<blockquote><pre>
+realmtool -list default
+<a name="65202"> </a>
+</pre></blockquote>
+
+<p>
+  <a name="65203"> </a><font >To add a user to the default realm you specify the <code>-add</code> flag. The following command will add a user named <code>robin</code> who is protected by the password <code>red</code>, and will include <code>robin</code> in the <code>bird</code> and <code>wing</code> groups:</font>
+</p>
+
+<blockquote><pre>
+realmtool -add robin red bird,wing
+<a name="65204"> </a>
+</pre></blockquote>
+
+<p>
+  <a name="65206"> </a><font >To add a user to the certificate realm, you import a file containing the X.509 certificate that identifies the user: </font>
+</p>
+
+<blockquote><pre>
+realmtool -import certificate-file
+<a name="65207"> </a>
+</pre></blockquote>
+
+<p>
+  <a name="65208"> </a><font >To remove a user, you specify the <code>-remove</code> flag. For example, to remove a user named <code>sparrow</code> from the default realm, you would type the following command:</font>
+</p>
+
+<blockquote><pre>
+realmtool -remove default sparrow
+<a name="65209"> </a>
+</pre></blockquote>
+
+<p>
+  <a name="65211"> </a><font >To add a group to the default realm you specify the <code>-addGroup</code> flag. The following command adds the <code>wing</code> group:</font>
+</p>
+
+<blockquote><pre>
+realmtool -addGroup wing
+<a name="65212"> </a>
+</pre></blockquote>
+
+<p>
+  <a name="65213"> </a><font >(You cannot add a group to the certificate realm.)</font>
+</p>
+
+
+<p>
+  <a name="65214"> </a><font >To remove a group from the default realm, you specify the <code>-removeGroup </code>flag:</font>
+</p>
+
+<blockquote><pre>
+realmtool -removeGroup wing
+<a name="65215"> </a>
+</pre></blockquote>
+
+<h2>
+  <a name="65195"> </a><font color="#666699" face="sans-serif">runclient Script</font>
+</h2>
+
+
+<p>
+  <a name="63138"> </a><font >To run a J2EE application client, you execute the <code>runclient</code> script from a command-line prompt.</font>
+</p>
+
+
+<h3>
+  <a name="65371"> </a><font color="#666699" face="sans-serif">Syntax</font>
+</h3>
+
+<blockquote><pre>
+runclient -client <i>&lt;appjar&gt;</i> [-name <i>&lt;name&gt;</i>]
+
+[-textauth] [<i>app-args</i>]
+<a name="65913"> </a>
+</pre></blockquote>
+
+<p>
+  <a name="66755"> </a><font ><p></p>
+<table border="1" cellpadding="5" cellspacing="0">
+  <caption align=left><b><font face=""><a name="65919"> </a>Table 6    runclient Options&nbsp;</font></b></caption>
+  <tr align="center" bgcolor="#CCCCCC">
+    <th><font face="" color="#666699">
+<a name="65923"> </a><font >Option<br></font>
+
+</font></th>
+    <th><font face="" color="#666699">
+<a name="65925"> </a><font >Description<br></font>
+
+</font></th>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="65927"> </a><font ><code>-client </code><i>&lt;appjar&gt;</i><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="65929"> </a><font >The J2EE application EAR file<br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="65931"> </a><font ><code>-name </code><i>&lt;name&gt;</i><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="65933"> </a><font >The display name of the J2EE application client component<br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="65935"> </a><font ><code>-textauth </code><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="65937"> </a><font >Causes the client container to prompt for the user name and password are from the command line, not from a pop-up window<br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="65943"> </a><font ><i>&lt;app-args&gt;</i><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="65945"> </a><font >Any arguments required by the J2EE application<br></font>
+
+</font></td>
+  </tr>
+</table>
+
+
+
+</font>
+</p>
+
+
+<h3>
+  <a name="65947"> </a><font color="#666699" face="sans-serif">Example</font>
+</h3>
+
+
+<p>
+  <a name="65723"> </a><font >Before executing the <code>runclient</code> command, you must set the <code>APPCPATH</code> environment variable to the name of the client JAR stub file that is generated during deployment. The following example shows how to set <code>APPCPATH</code> on a Windows machine. The <code>runclient</code> command that follows launches a client named <code>FabulousClient</code>. The J2EE application of this client resides in the <code>FabulousApp.ear</code> file.</font>
+</p>
+
+<blockquote><pre>
+set APPCPATH=FabulousAppClient.jar
+
+runclient -client FabulousApp.ear -name FabulousClient
+<a name="65731"> </a>
+</pre></blockquote>
+
+<h3>
+  <a name="65815"> </a><font color="#666699" face="sans-serif">Accessing a Remote Server</font>
+</h3>
+
+
+<p>
+  <a name="65956"> </a><font >If the J2EE application client will reside on a different machine than the J2EE server, before executing <code>runclient</code> you must do the following:</font>
+</p>
+
+<ol type="1">
+  <font ><li  value="1"><a name="66830"> </a>Install the J2EE SDK on the remote client's machine. The SDK must be on the client's machine so that you can run its <code>runclient</code> script. You do not need to start the J2EE server on the client's machine.</font>
+  <font ><li  value="2"><a name="65966"> </a>Copy the EAR file to the remote client's machine.</font>
+  <font ><li  value="3"><a name="65999"> </a>Copy the client JAR stub file to the remote client's machine.</font>
+  <font ><li  value="4"><a name="65975"> </a>Set the <code>APPCPATH</code> environment variable to the name of the client JAR stub file.</font>
+  <font ><li  value="5"><a name="65960"> </a>Set the <code>VMARGS</code> environment variable to the following value: </font>
+<blockquote><pre>
+-Dorg.omg.CORBA.ORBInitialHost=<code><i>&lt;remote-host&gt;
+</i></code><a name="65831"> </a>
+</pre></blockquote>
+</ol>
+<dl>
+<p>
+  <a name="65980"> </a><font ><dd>For example, if the remote host were named <code>murphy</code>, you would set the <code>VMARGS</code> variable on a Windows machine as follows:</font>
+</p>
+
+<blockquote><pre>
+set VMARGS=-Dorg.omg.CORBA.ORBInitialHost=murphy
+<a name="65983"> </a>
+</pre></blockquote>
+</dl>
+<h3>
+  <a name="68583"> </a><font color="#666699" face="sans-serif">Preventing the User Name and Password Prompts</font>
+</h3>
+
+
+<p>
+  <a name="68584"> </a><font >During iterative development, you may find it convenient to prevent the client container from prompting for the user name and password. To prevent these prompts, set the <code>VMARGS</code> environment variable to the following value:</font>
+</p>
+
+<blockquote><pre>
+-Dj2eelogin.name=guest -Dj2eelogin.password=guest123
+<a name="68587"> </a>
+</pre></blockquote>
+
+<h2>
+  <a name="65833"> </a><font color="#666699" face="sans-serif">Verifier Tool</font>
+</h2>
+
+
+<p>
+  <a name="63152"> </a><font >The <code>verifier</code> tool validates J2EE archive files (EAR, WAR, JAR).</font>
+</p>
+
+
+<p>
+  <a name="63157"> </a><font >You can run <code>verifier</code> three ways:</font>
+</p>
+
+<ul>
+  <font ><li ><a name="63158"> </a>From within the <code>deploytool</code> GUI</font>
+  <font ><li ><a name="63159"> </a>As a command-line utility</font>
+  <font ><li ><a name="63160"> </a>As a stand-alone GUI utility</font>
+</ul>
+
+<p>
+  <a name="63161"> </a><font >To run <code>verifier</code> from within the <code>deploytool</code> GUI, choose Verifier from the Tools menu. The following sections explain how to run the verifier the other two ways.</font>
+</p>
+
+
+<h3>
+  <a name="63162"> </a><font color="#666699" face="sans-serif">Command-Line Verifier</font>
+</h3>
+
+
+<p>
+  <a name="64170"> </a><font >The command-line <code>verifier</code> tool has the following syntax:</font>
+</p>
+
+<blockquote><pre>
+verifier [<i>options</i>] <i>&lt;filename&gt;
+</i><a name="63164"> </a>
+</pre></blockquote>
+
+<p>
+  <a name="63165"> </a><font >The <i>filename</i> argument is the name of a J2EE component file.<p></p>
+<table border="1" cellpadding="5" cellspacing="0">
+  <caption align=left><b><font face=""><a name="64186"> </a>Table 7    verifier Options</font></b></caption>
+  <tr align="center" bgcolor="#CCCCCC">
+    <th><font face="" color="#666699">
+<a name="64190"> </a><font >Syntax<br></font>
+
+</font></th>
+    <th><font face="" color="#666699">
+<a name="64192"> </a><font >Description<br></font>
+
+</font></th>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="64194"> </a><font ><code>-v</code><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="64196"> </a><font >Displays a verbose version of output.<br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="64198"> </a><font ><code>-o </code><i>&lt;output-file&gt;</i><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="64200"> </a><font >Writes the results to the specified <i>&lt;output-file&gt;</i>, overriding the default <code>Results.txt</code> file.<br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="64202"> </a><font ><code>-u</code><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="64204"> </a><font >Runs the stand-alone GUI version.<br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="64206"> </a><font ><code>-</code><i>&lt;report-level&gt;</i><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="64208"> </a><font >Determines whether warnings or failures are reported. The <i>&lt;report-level&gt;</i> may be either <code>a</code>, <code>w</code>, or <code>f</code>: <br></font>
+
+
+<a name="66704"> </a><font ><code>a</code> (all results) <br></font>
+
+
+<a name="66706"> </a><font ><code>w</code> (warnings only) <br></font>
+
+
+<a name="66708"> </a><font ><code>f</code> (failures only)<br></font>
+
+
+<a name="66710"> </a><font >By default, only warnings and failures are reported.<br></font>
+
+</font></td>
+  </tr>
+</table>
+
+
+
+</font>
+</p>
+
+
+<h3>
+  <a name="63180"> </a><font color="#666699" face="sans-serif">Stand-Alone GUI Verifier</font>
+</h3>
+
+
+<p>
+  <a name="63181"> </a><font >To run the stand-alone GUI <code>verifier</code> tool, follow these steps:</font>
+</p>
+
+<ol type="1">
+  <font ><li  value="1"><a name="63182"> </a>From the command-line prompt, type:</font>
+<blockquote><pre>
+verifier -u
+<a name="63183"> </a>
+</pre></blockquote>
+  <font ><li  value="2"><a name="63184"> </a>To select a file for verification, click Add.</font>
+  <font ><li  value="3"><a name="63185"> </a>Select the radio button to indicate the report level:</font>
+  <ul>
+    <font ><li ><a name="63186"> </a>All Results</font>
+    <font ><li ><a name="63187"> </a>Failures Only</font>
+    <font ><li ><a name="63188"> </a>Failures and Warnings Only</font>
+  </ul>
+  <font ><li  value="4"><a name="63189"> </a>Click OK.</font>
+  <font ><li  value="5"><a name="63190"> </a>The <code>verifier</code> tool lists the details in the lower portion of the screen. </font>
+</ol>
+</blockquote>
+
+
+
+</body>
+</html>

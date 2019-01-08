@@ -1,0 +1,9 @@
+<rspec xmlns="http://www.protogeni.net/resources/rspec/2" xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.protogeni.net/resources/rspec/2        http://www.protogeni.net/resources/rspec/2/request.xsd" type="request">
+  <rspec_tour xmlns="http://www.protogeni.net/resources/rspec/ext/apt-tour/1"><description type="markdown">A node with a blockstore that is loaded from an image backed dataset. The dataset is your private copy, you can change it as needed. </description><instructions type="markdown">After you log in, cd into /mydata and use it. The data will be retained across reboots, but any changes you make will be lost when you terminate your experiment. If you want to save a new copy of your data after modification, go to the Actions dropdown menu above and choose List Datasets. Find the dataset, click through and then click on Snapshot.</instructions></rspec_tour>
+  <node client_id="tomcat" exclusive="true">
+    <sliver_type name="raw">
+      <hardware_type name="pc3000"/>
+      <disk_image name="urn:publicid:IDN+emulab.net+image+Infosphere:rubbos-image-base"/>
+   </sliver_type>
+  </node>
+</rspec>

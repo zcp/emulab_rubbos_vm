@@ -1,0 +1,649 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<title></title>
+</head>
+<body bgcolor=#ffffff>
+ 
+<hr>
+<br>
+ 
+<a name="7940"></a>
+<font size=-1>
+<a href="../index.html">J2EE Doc Bundle Home</a>
+</font>
+<br>
+<hr>
+<TABLE BORDER="0" WIDTH="100%">
+<TR>
+<TD width=60>
+<IMG SRC="javalogo52x88.gif" ALT="Java" width=52>
+</TD>
+<TD align=center>
+<h1>
+Java<font size=-1><sup>TM</sup></font> 2 SDK, Enterprise Edition 1.3.1 Configuration Guide
+</h1>
+
+</TD>
+<TD width=60>
+&nbsp;
+</TD>
+</TR>
+</TABLE>
+
+<hr>
+<br>
+<a name="9697"></a>
+Revised: 1/3/02<p>
+<a name="10643"></a>
+<h1>Contents  </h1>
+
+<ul><a name="11641"></a>
+<li><a href="ConfigGuide.html#11515">Introduction</a><br><br>
+<a name="12225"></a>
+<li><a href="ConfigGuide.html#12442">JDBC<font size=-1><sup>TM</sup></font> Drivers</a><br><br>
+<a name="13303"></a>
+<li><a href="ConfigGuide.html#12135">Transactions</a><br><br>
+<a name="12229"></a>
+<li><a href="ConfigGuide.html#12142">Port Numbers</a><br><br>
+<a name="12233"></a>
+<li><a href="ConfigGuide.html#10849">Log Files</a><br><br>
+<a name="13617"></a>
+<li><a href="ConfigGuide.html#16637">Security</a><br><br>
+<a name="13726"></a>
+<li><a href="ConfigGuide.html#14702">Memory Threshold for Passivation</a><br><br>
+<a name="14227"></a>
+<li><a href="ConfigGuide.html#14223">JMS Settings</a><br><br>
+</ul>
+<a name="11515"></a>
+<h1>Introduction  </h1>
+<a name="12255"></a>
+This release, Java<sup><font size=-1>TM</font></sup> 2 SDK, Enterprise Edition 1.3.1, stores configuration information in a set of properties files that reside in the <code>config</code> directory. You may edit these files with a text editor. This document describes the configuration parameters that you may edit in the properties files. <p><a name="13627"></a>
+In most cases, you won't have to make any changes to the properties files. However, if you wish to use a database driver other than Cloudscape, you'll need to follow the instructions in the next section.<p><a name="12306"></a>
+<a name="jdbc"></a><p>
+<a name="12442"></a>
+<h1>JDBC<font size=-1><sup>TM</sup></font> Drivers  </h1>
+<a name="12937"></a>
+This release includes a JDBC driver for the Cloudscape DBMS. This driver is already configured in the <code>config/resource.properties</code> file. No further changes by you are necessary. (If you encounter a port conflict with Cloudscape, please refer to the <a href="ConfigGuide.html#12142">Port Numbers</a> section.) By default, Cloudscape databases will be created in the <code>cloudscape</code> directory. <p><a name="13441"></a>
+If your enterprise beans use the JDBC API to access a database other than Cloudscape, then you must configure the JDBC drivers according to the instructions in the sections that follow. (If you aren't sure if this release supports your JDBC driver, see the <a href="ReleaseNotes.html#jdbc">Supported Databases and JDBC Drivers</a> section of the Release Notes.) <p><a name="14077"></a>
+Note: After you configure a JDBC driver you must restart the J2EE server for the new configuration to take effect.<p>
+<a name="13745"></a>
+<h2> Driver Location</h2>
+<a name="13742"></a>
+You must copy the JDBC driver JAR files to the <code>$J2EE_HOME/lib/system</code> directory. (Files in this directory have the <code>java.security.AllPermission</code>, needed because a driver may perform privileged operations.) Be sure to include the classpath to these JAR files in the <code>J2EE_CLASSPATH</code> environment variable. <p>
+<a name="13756"></a>
+<h2> J2EE_CLASSPATH</h2>
+<a name="13757"></a>
+The J2EE server uses a JDBC driver to access a database. It locates the driver's JAR files by referencing the <code>J2EE_CLASSPATH</code> environment variable. You can set this environment variable on the command line before you run the J2EE server. However, we recommend that you set <code>J2EE_CLASSPATH</code> in the user configuration script. Editing the user configuration script is a required step during the installation procedure. On UNIX systems the user configuration script is in <code>bin/userconfig.sh</code>, and on Windows it is in <code>bin\userconfig.bat</code>.<p>
+<a name="13811"></a>
+<h2> About XA Datasource Support</h2>
+<a name="13812"></a>
+Drivers that support XA datasources allow you to connect to multiple databases and to distribute transactions across machines or processes. JDBC 1.0 drivers do not support XA datasources. Some JDBC 2.0 drivers support XA datasources and some do not. If you do not know whether or not your driver supports XA datasources, please check with the driver's vendor. <p><a name="18397"></a>
+The instructions that you follow depend on whether or not your driver supports XA datasources:<p>
+<ul><a name="13823"></a>
+<li>If your driver does not support XA datasources, you must follow the instructions in the section, <a href="ConfigGuide.html#13844">Drivers Without XA Datasource Support</a>. <br><br>
+<a name="13839"></a>
+<li>If your driver supports XA datasources, to take advantage of XA's features you must follow the instructions in the section, <a href="ConfigGuide.html#12960">Drivers with XA Datasource Support</a>. <br><br>
+<a name="13849"></a>
+<li>If your driver supports XA datasources and you follow the instructions in the section, <a href="ConfigGuide.html#13844">Drivers Without XA Datasource Support</a>, the driver will work but cannot take advantage of XA's features.<br><br>
+</ul><a name="18386"></a>
+For more information, see the section New Treatment of Non-XA Data Transactions in the <a href="ReleaseNotes.html">Release Notes</a>.<p>
+<a name="13844"></a>
+<h2> Drivers Without XA Datasource Support</h2>
+<a name="13809"></a>
+1. Add the JDBC driver.<p><a name="14103"></a>
+Syntax:<p><blockquote>
+<pre><a name="14110"></a>j2eeadmin -addJdbcDriver &lt;class name&gt;
+</pre>
+</blockquote><a name="14104"></a>
+Example:<p><blockquote>
+<pre><a name="14114"></a>j2eeadmin -addJdbcDriver oracle.jdbc.driver.OracleDriver
+</pre>
+</blockquote><a name="14105"></a>
+2. Add the <code>DataSource</code>:.<p><a name="14102"></a>
+Syntax:<p><blockquote>
+<pre><a name="14122"></a>j2eeadmin -addJdbcDatasource &lt;jndi name&gt; &lt;url&gt;
+</pre>
+</blockquote><a name="14100"></a>
+Example:<p><blockquote>
+<pre><a name="14132"></a>j2eeadmin -addJdbcDatasource jdbc/Oracle 
+jdbc:oracle:thin@rtc:1521:acct
+</pre>
+</blockquote><a name="10771"></a>
+This command links the JNDI name of a <code>DataSource</code> with the URL of a database. Typically, the JNDI name is the logical name of a database. The URL specifies the actual location of a database. Neither the JNDI name nor the URL are hardcoded in the source code of an enterprise bean. To determine the format of the URL, please check the documentation provided by the vendor of the JDBC driver.<p><a name="14202"></a>
+3. Update the<code> J2EE_CLASSPATH</code>. (See the <a href="ConfigGuide.html#13756">J2EE_CLASSPATH</a> section.)<p><a name="14209"></a>
+4. Restart the J2EE server.<p>
+<a name="12960"></a>
+<h2> Drivers with XA Datasource Support</h2>
+<a name="14151"></a>
+1. Add the <code>DataSource</code>.<p><a name="14152"></a>
+Syntax:<p><blockquote>
+<pre><a name="14153"></a>j2eeadmin -addJdbcXADatasource &lt;jndi name&gt; 
+<a name="14188"></a>&lt;class name&gt; 
+<a name="14167"></a>[&lt;xa user name&gt; &lt;xa password&gt;] 
+<a name="14168"></a>[-props (&lt;name&gt;=&lt;value&gt;)+]
+</pre>
+</blockquote><a name="14154"></a>
+Example:<p><blockquote>
+<pre><a name="14155"></a>j2eeadmin -addJdbcXADatasource jdbc/XAMerant
+<a name="14189"></a>com.merant.sequelink.jdbcx.datasource.SequeLinkDataSource
+<a name="14197"></a>buzz xhfu5k3t
+<a name="14144"></a>-props serverName=myserver portNumber=19996
+</pre>
+</blockquote><a name="14215"></a>
+2. Update the <code>J2EE_CLASSPATH</code>. (See the <a href="ConfigGuide.html#13756">J2EE_CLASSPATH</a> section.)<p><a name="14216"></a>
+3. Restart the J2EE server.<p>
+<a name="14594"></a>
+<h2> An Example resource.properties for Oracle</h2>
+<a name="14597"></a>
+The default <code>config/resource.properties</code> file specifies a driver for the Cloudscape database. If you want to use an Oracle database, you may use a file similar to the following:<p><blockquote>
+<pre><a name="14637"></a>jdbcDataSource.0.name=jdbc/Oracle
+<a name="14602"></a>jdbcDataSource.0.url=jdbc:sequelink://anybodys.eng.sun.com:19996
+<a name="14603"></a>jdbcDriver.0.name=com.merant.sequelink.jdbc.SequeLinkDriver
+<a name="14604"></a>jdbcXADataSource.0.name=jdbc/Merant
+<a name="14605"></a>jdbcXADataSource.0.classname=com.merant.sequelink.jdbcx.datasource.
+SequeLinkDataSource
+<a name="14606"></a>jdbcXADataSource.0.dbpassword=
+<a name="14607"></a>jdbcXADataSource.0.dbuser=
+<a name="14608"></a>jdbcXADataSource.0.prop.serverName=anybodys
+<a name="14609"></a>jdbcXADataSource.0.prop.portNumber=19996
+<a name="14610"></a>jmsCnxFactory.0.name=QueueConnectionFactory
+<a name="14611"></a>jmsCnxFactory.0.isQueue=true
+<a name="14612"></a>jmsCnxFactory.1.name=TopicConnectionFactory
+<a name="14613"></a>jmsCnxFactory.1.isQueue=false
+<a name="14614"></a>jmsCnxFactory.2.name=jms/QueueConnectionFactory
+<a name="14615"></a>jmsCnxFactory.2.isQueue=true
+<a name="14616"></a>jmsCnxFactory.3.name=jms/TopicConnectionFactory
+<a name="14617"></a>jmsCnxFactory.3.isQueue=false
+<a name="14618"></a>jmsDestination.0.name=jms/Queue
+<a name="14619"></a>jmsDestination.0.isQueue=true
+<a name="14620"></a>jmsDestination.1.name=jms/Topic
+<a name="14621"></a>jmsDestination.1.isQueue=false
+</pre>
+</blockquote>
+<a name="12135"></a>
+<h1>Transactions  </h1>
+<a name="13201"></a>
+You can control transaction recoveries and timeouts by editing the <code>config/default.properties</code> file.<p>
+<a name="13206"></a>
+<h3> The distributed.transaction.recovery Property</h3>
+<a name="13207"></a>
+This property controls whether or not distributed transactions will be recovered. For these transactions to be recovered, the following conditions must be met: The transaction encompasses multiple databases. The J2EE application accesses the databases with a JDBC driver that supports XA datasources. All of the parties involved in the two-phase commit protocol have agreed to commit (or rollback) the transaction when the crash occurs. When the server starts up again, the transaction will be committed (or rolled back) during the recovery process.<p><a name="13223"></a>
+The value of this property may be either <code>true</code> or <code>false</code>. When the J2EE SDK is first installed, the value is <code>false</code>:<p><blockquote>
+<pre><a name="13210"></a>distributed.transaction.recovery=false
+</pre>
+</blockquote>
+<a name="13208"></a>
+<h3> The transaction.timeout Property</h3>
+<a name="13209"></a>
+For enterprise beans with container-managed transactions, you control the transaction timeout interval by setting the value of the <code>transaction.timeout</code> property. For example, you would set the timeout value to 5 seconds as follows:<p><blockquote>
+<pre><a name="13255"></a>transaction.timeout=5
+</pre>
+</blockquote><a name="13257"></a>
+With this setting, if the transaction has not completed within 5 seconds, the J2EE transaction manager rolls it back. <p><a name="13267"></a>
+When J2EE SDK is first installed, the timeout value is set to 0:<p><blockquote>
+<pre><a name="13271"></a>transaction.timeout=0
+</pre>
+</blockquote><a name="13268"></a>
+If the value is 0, the transaction will not time out.<p><a name="13269"></a>
+Only enterprise beans with container-managed transactions are affected by the <code>transaction.timeout</code> property. For enterprise beans with bean-managed, JTA transactions, you invoke the <code>setTransactionTimeout</code> method of the <code>UserTransaction</code> interface. You also invoke the <code>setTransactionTimeout</code> method for other components, such as servlets and JSP pages, that demarcate transactions with the <code>UserTransaction</code> interface.<p>
+<a name="12142"></a>
+<h1>Port Numbers  </h1>
+<a name="12146"></a>
+The Java<font size=-1><sup>TM</sup></font> 2 SDK, Enterprise Edition software requires several TCP/IP ports. To change a port number, edit the appropriate properties file in the <code>config</code> directory. The following table lists the ports and their corresponding properties files.<p><a name="13945"></a>
+ 
+<Table Border="3">
+<caption><a name="13365"></a>
+TABLE 1 	  Java<font size=-1><sup>TM</sup></font> 2 SDK, Enterprise Edition Ports<p>
+</caption>
+<tr><th><a name="13375"></a>
+ Service<br>Using the Port<p>
+<th><a name="13377"></a>
+ Default <br>Port Number<p>
+<th><a name="13379"></a>
+ Properties File<p>
+<th><a name="13381"></a>
+ Default Entry<br>in Properties File<p>
+<th><a name="13383"></a>
+ Description<p>
+
+<tr><td><a name="13385"></a>
+EJB 
+<td><a name="13387"></a>
+9191
+<td><a name="13389"></a>
+ejb.properties
+<td><a name="13391"></a>
+http.port=9191
+<td><a name="13393"></a>
+The EJB service uses this port to download stub classes to clients.
+
+<tr><td><a name="13395"></a>
+HTTP
+<td><a name="13397"></a>
+8000
+<td><a name="13399"></a>
+web.properties
+<td><a name="13401"></a>
+http.port=8000
+<td><a name="13403"></a>
+The HTTP service uses this port to service requests.
+
+<tr><td><a name="13415"></a>
+HTTPS
+<td><a name="13417"></a>
+7000
+<td><a name="13419"></a>
+web.properties
+<td><a name="13421"></a>
+https.port=7000
+<td><a name="13434"></a>
+The HTTPS service uses this port to service requests.
+
+<tr><td><a name="13405"></a>
+Naming and Directory
+<td><a name="13407"></a>
+1050
+<td><a name="13409"></a>
+orb.properties
+<td><a name="13411"></a>
+port=1050
+<td><a name="13413"></a>
+The ORB (Object Request Broker) underlying the JNDI name server uses this port.
+
+
+</Table>
+
+<Table>
+<tr><td>
+</Table>
+<p><a name="12201"></a>
+<p>
+<a name="14529"></a>
+<h2> Cloudscape Port</h2>
+<a name="18335"></a>
+By default, the Cloudscape database server uses port 1099. To change port 1099 to 1088, for example, you must make several changes:<p><a name="18346"></a>
+1. Edit the <code>bin/cloudscape</code> script (<code>bin\cloudscape.bat</code> on Windows):<p><a name="14576"></a>
+a. In the <code>-start</code> portion of the script, insert the port number:<p><blockquote>
+<pre><a name="14577"></a>. . . RmiJdbc.RJJdbcServer -port 1088. . .
+</pre>
+</blockquote><a name="14562"></a>
+b. In the <code>-stop</code> portion, insert the port number here:<p><blockquote>
+<pre><a name="14581"></a>jdbc:rmi://localhost:1088/jdbc:cloudscape:
+</pre>
+</blockquote><a name="18347"></a>
+c.  In the <code>-isql</code> portion, change the 1099 port number to 1088.<p><a name="14563"></a>
+2. In the <code>config/resource.properties</code> file, make this change:<p><blockquote>
+<pre><a name="14583"></a>jdbcDataSource.0.url=jdbc:cloudscape:rmi://localhost:1088/
+CloudscapeDB;create=true
+</pre>
+</blockquote><a name="18354"></a>
+For the J2EE Tutorial, you'll also need to change port number 1099 in the <code>build.xml</code> files, which are located in your J2EE Tutorial installation:<p><blockquote>
+<pre><a name="18358"></a>  bank/build.xml
+<a name="18352"></a>  examples/src/build.xml
+</pre>
+</blockquote>
+<a name="10849"></a>
+<h1>Log Files  </h1>
+<a name="18400"></a>
+Each service -- J2EE, JMS, Web -- generates a group of log files. These files reside beneath the directory specified by this syntax:<p><blockquote>
+<pre><a name="18401"></a>$J2EE_HOME/logs/&lt;host&gt;
+</pre>
+</blockquote><a name="13990"></a>
+The <code>&lt;host&gt;</code> element is the name of the computer.<p>
+<a name="13969"></a>
+<h2> J2EE Log Files</h2>
+<a name="13970"></a>
+The J2EE log files reside in the following directory:<p><blockquote>
+<pre><a name="14005"></a>$J2EE_HOME/logs/&lt;host&gt;/j2ee/j2ee
+</pre>
+</blockquote><a name="13971"></a>
+The J2EE service generates these log files:<p><blockquote>
+<pre><a name="14010"></a>system.out
+<a name="14011"></a>system.err
+<a name="14012"></a>event.log
+<a name="14013"></a>output.log
+<a name="14014"></a>error.log
+<a name="14015"></a>audit.log
+</pre>
+</blockquote><a name="14016"></a>
+The <code>system.out</code> and <code>system.err</code> files contain the output generated by enterprise beans that write to <code>System.out</code> and <code>System.err</code>. If you run <code>j2ee</code> with the <code>verbose</code> option, this output is written to <code>stdout</code> and <code>stderr</code>; the <code>system.out</code> and <code>system.err</code> log files are not created. The <code>audit.log</code> file is generated only if the <code>audit</code> property of the <code>config/auth.properties</code> file equals <code>true</code>.<p>
+<a name="14027"></a>
+<h2> Web Log Files</h2>
+<a name="14028"></a>
+The Web log files reside in the following directory:<p><blockquote>
+<pre><a name="14029"></a>$J2EE_HOME/logs/&lt;host&gt;/web
+</pre>
+</blockquote><a name="14030"></a>
+The Web service generates <code>catalina</code> log files.<p>
+<a name="14046"></a>
+<h2> JMS Log Files</h2>
+<a name="14047"></a>
+The JMS log files reside in the following directory:<p><blockquote>
+<pre><a name="14048"></a>$J2EE_HOME/logs/&lt;host&gt;/jms/jms
+</pre>
+</blockquote><a name="14049"></a>
+The JMS service generates these log files:<p><blockquote>
+<pre><a name="14050"></a>error.log
+<a name="14065"></a>event.log
+<a name="14066"></a>output.log
+</pre>
+</blockquote><a name="16636"></a>
+<p>
+
+<a name="16637"></a>
+<h1>Security  </h1>
+
+<a name="16638"></a>
+<h2> Unauthenticated User Name</h2>
+<a name="16639"></a>
+Web applications accept unauthenticated web clients and allow them to make calls to the EJB container. The EJB specification requires a security credential for EJB method calls. Typically the credential will be that of a generic unauthenticated user. How this credential is provided is implementation dependent. <p><a name="16640"></a>
+In the J2EE SDK the unauthenticated user is called a <code>guest</code> and has the password<code> guest123</code>. You can modify the name of the unauthenticated user and password by modifying the following entries in the <code>auth.properties</code> file: <p><blockquote>
+<pre><a name="16641"></a>default.principal.name=guest
+<a name="16642"></a>default.principal.password=guest123
+</pre>
+</blockquote>
+<a name="16645"></a>
+<h2> ANYONE Role</h2>
+<a name="16646"></a>
+In the Security tabbed pane of the deploytool, methods are assigned the <code>ANYONE</code> role by default. The <code>ANYONE</code> role represents the universal set of all users and groups. If you do not map a method to a role in <code>deploytool</code>, any user or group may invoke the method. The default <code>ANYONE</code> role can be changed by editing the <code>anyone.role.name</code> entry in the <code>auth.properties</code> file. <p>
+<a name="17384"></a>
+<h2> Using Keystores with SSL Protocol</h2>
+<a name="17413"></a>
+The SSL protocol is used for authentication and encryption of the communication channels between a clients, enterprise beans, or Web components. Keystore files containing the public, or private keys for a client or component are used for authentication with the SSL Protocol. <p><a name="17588"></a>
+The J2EE SDK provides a default server keystore called the <code>keystore.jks</code> and a default client keystore called the <code>clientkeystore.jks</code>. These files are in the J2EE SDK distribution's <code>$J2EE_HOME/lib/security</code> directory. <p><a name="17577"></a>
+Another required keystore is the <code>cacerts.jks</code> file. This file must contain the public key certificates of the Certificate Authority or the client's public key certificate at the time the server is authenticating the client. The J2EE SDK provides a default <code>cacerts.jks</code> file, which resides in the <code>$J2EE_HOME/lib/security</code> directory. <p><a name="17445"></a>
+Typically, a <code>keystore</code> file is protected by a password. The default value for this password is<code> changeit </code>for the default <code>keystore.jks</code>, <code>clientkeystore.jks</code>, and <code>cacerts.jks</code> files.<p>
+<a name="16647"></a>
+<h2> Authentication with SSL</h2>
+
+<a name="17693"></a>
+<h3> Normal Authentication</h3>
+<a name="17608"></a>
+In the normal SSL handshake with server-only authentication, a client asks the server to identify itself. The server responds by sending its public key certificate to the client and communication proceeds if the certificate is recognized by the client. <p><a name="17621"></a>
+To enable SSL authentication for an enterprise bean, select the bean in the Tree view (the left panel) of the <code>deploytool</code> primary window and click on the Security tab. In the Security inspector in the right panel, click on Deployment Settings. Select the SSL Required check box in the Deployment Settings dialog. This will encrypt the session between the client and the bean with the server authenticating itself to the bean.<p><a name="18035"></a>
+Run the application client using the <code>runclient</code> script. <p>
+<a name="17694"></a>
+<h3> Mutual Authentication</h3>
+<a name="17514"></a>
+Mutual authentication requires that both the client and the server identify themselves, adding an additional degree of security. After the public key certificate from the server is received, the client sends its public key certificate to the server. The server looks at the Certificate Authority who signed the certificate and decides whether it can trust the certificate. This process is done transparently by the Java Secure Socket Extension (JSSE). <p><a name="17699"></a>
+To start mutual SSL authentication, select the bean in the Tree view (the left panel) of the <code>deploytool</code> primary window and click on the Security tab. In the Security inspector in the right panel, click on Deployment Settings. Select the SSL Required check box in the Deployment Settings dialog as in normal SSL authentication. While in the Deployment Settings dialog, select the Certificate radio button in the Client Authentication pane. This will cause the application client to authenticate itself to the server. <p><a name="17704"></a>
+For mutual SSL authentication, the path to the client's keystore file must be provided by setting the following system property in the <code>VMARGS</code> environment variable: <p><blockquote>
+<pre><a name="17795"></a>-Dcom.sun.enterprise.keyStore=$J2EE_HOME/lib/security/
+clientkeystore.jks 
+</pre>
+</blockquote><a name="17815"></a>
+For application clients using mutual SSL with an enterprise bean, you will need to provide an additional property informing the application client container that SSL with client authentication will be used. The property is <p><blockquote>
+<pre><a name="17697"></a>-Dcom.sun.enterprise.loginMech=ssl 
+</pre>
+</blockquote><a name="17858"></a>
+Finally, run the application client using the <code>runclient</code> script. This will pop up a dialog box asking for the keystore password. On successful entry of the keystore password (<code>changeit</code> for the default keystore), a list of certificates will be shown in a new dialog box. Select the valid certificate and click OK. This will start mutual authentication with SSL. <p>
+<a name="18050"></a>
+<h3> Troubleshooting Mutual Authentication</h3>
+<a name="18051"></a>
+If the application client fails, check the following: <p>
+<ul><a name="18052"></a>
+<li>Check if the client certificate has been imported into the cacerts file of the server. <br><br>
+<a name="18053"></a>
+<li>Check to see if the client is running with the environment options listed here. <br><br>
+</ul>
+<a name="18054"></a>
+<h4> Checking That Mutual Authentication Is Running</h4>
+<a name="18055"></a>
+You can check that mutual authenticating is running by doing the following: <p><a name="18056"></a>
+1. In the <code>setenv.sh</code> (UNIX) or <code>setenv.bat</code> (Windows) file, find <code>SSL_OPTIONS</code> and turn on the debug tracing property in either of the following ways: <p><blockquote>
+<pre><a name="18057"></a>-Djavax.net.debug=ssl,handshake
+</pre>
+</blockquote><a name="18058"></a>
+or <p><blockquote>
+<pre><a name="18059"></a>-Djavax.net.debug=all
+</pre>
+</blockquote><a name="18060"></a>
+2. Restart the server in <code>verbose</code> mode. <p><a name="18061"></a>
+3. Look for the following messages that verify that mutual authentication is running: <p><blockquote>
+<pre><a name="18062"></a>certificate client_to_server 
+<a name="18063"></a>client_key_exchange client_to_server 
+<a name="18064"></a>client_verify client_to_server 
+</pre>
+</blockquote>
+<a name="17110"></a>
+<h3> Procedures for Creating Custom Certificates</h3>
+<a name="17217"></a>
+When the default keystores are inappropriate or missing, the <code>keytool</code> is used to replace them. (The <code>keytool</code> can be found in the <code>bin</code> directory of the J2EE SDK installation.)<p>
+<a name="17233"></a>
+<h4> Creation of a Server Certificate</h4>
+<a name="16688"></a>
+We show here the creation of a server certificate: <p><a name="16689"></a>
+1. Use the following instruction: <p><blockquote>
+<pre><a name="16690"></a>keytool -genkey -keyalg RSA -alias server -keystore keystore.jks
+</pre>
+</blockquote><a name="17902"></a>
+You will be prompted for a password. Enter the default password <code>changeit </code>(The command to change the keystore password is <code>keytool -storepasswd</code>. Run <code>keytool -help</code> for the complete option list). <p><a name="17911"></a>
+2. Enter your information for the following prompts: <p>
+<ul><a name="16797"></a>
+<li>			Name: J2EE <br><br>
+<a name="16798"></a>
+<li>Organization: Java Software <br><br>
+<a name="16696"></a>
+<li>Company Name: Sun Microsystems, Inc. <br><br>
+<a name="16697"></a>
+<li>Locality: Cupertino <br><br>
+<a name="16698"></a>
+<li>State: California <br><br>
+<a name="16699"></a>
+<li>Country: US <br><br>
+</ul><a name="16700"></a>
+3. Export the server certificate to a certificate file for input to the <code>realmtool</code>:<p><blockquote>
+<pre><a name="16701"></a>keytool -keystore keystore.jks -export -alias server -file 
+keystore.cer 
+</pre>
+</blockquote><a name="17919"></a>
+4. Import the new server certificate into the Certificate Authority file <code>cacerts.jks</code>:<p><blockquote>
+<pre><a name="16703"></a>keytool -import -alias serverCA -keystore $J2EE_HOME/lib/security/
+cacerts.jks -file keystore.cer
+</pre>
+</blockquote><a name="18428"></a>
+5.Copy the <code>keystore.jks</code> file to the <code>$J2EE_HOME/lib/security</code> directory.<p><a name="18429"></a>
+Note: The default server certificate is already prepared. You do this only if you wish to replace the default server certificate. <p>
+<a name="16707"></a>
+<h4> Creating a Client Certificate</h4>
+<a name="16708"></a>
+Creating a client certificate is similar to the procedure for server certificates set out above.<p><a name="17932"></a>
+1. Use <code>keytool</code> to create a server certificate in a keystore file of your choice: <p><blockquote>
+<pre><a name="17930"></a>keytool -genkey -keyalg RSA -alias MyClientAlias -keystore 
+mykeystore.jks
+</pre>
+</blockquote><a name="17947"></a>
+You will be prompted for a password. Enter <code>changeit</code>, as above. When requested enter the name, organization, and other prompts for the client. <p><a name="17958"></a>
+2. Export the new client certificate from the keystore to a certificate file: <p><blockquote>
+<pre><a name="17961"></a>keytool -keystore mykeystore.jks -export -alias MyClientAlias -file 
+myclientcert.cer
+</pre>
+</blockquote><a name="17989"></a>
+3. Import the new client certificate into the server's Certificate Authority file <code>cacerts.jks</code>. This allows the server to trust the client during SSL mutual authentication. <p><blockquote>
+<pre><a name="18021"></a>keytool -import -alias j2eeCA -keystore $J2EE_HOME/lib/security/
+cacerts.jks -file myclientcert.cer
+</pre>
+</blockquote><a name="18452"></a>
+4. Import a client certificate into the certificate realm:<p><blockquote>
+<pre><a name="18453"></a>realmtool -import myclientcert.cer
+</pre>
+</blockquote><a name="18454"></a>
+5. Copy <code>mykeystore.jks</code> to <code>$J2EE_HOME/lib/security/clientkeystore.jks</code>.<p>
+<a name="16713"></a>
+<h4> Miscellaneous Commands for Certificates</h4>
+<a name="16717"></a>
+To check the contents of the server certificate: <p><blockquote>
+<pre><a name="16718"></a>keytool -list -keystore keystore.jks -alias server -v
+</pre>
+</blockquote><a name="16720"></a>
+To check the contents of the cacerts file: <p><blockquote>
+<pre><a name="16721"></a>keytool -list -keystore cacerts.jks
+</pre>
+</blockquote>
+<a name="16756"></a>
+<h2> PKCS12 Support in the J2EE SDK</h2>
+<a name="16757"></a>
+PKCS12 keys are supported in the J2EE SDK. PKCS12 allows a user to import, export and exercise a single set of personal identity information. A complete description is at <p><blockquote>
+<pre><a name="16758"></a>http://www.rsasecurity.com/rsalabs/pkcs/pkcs-12/.
+</pre>
+</blockquote>
+<a name="16759"></a>
+<h3> Generating a PKCS12 File</h3>
+<a name="16760"></a>
+Netscape may be used to generate PKCS12 certificates: <p><a name="16761"></a>
+1. Open Netscape <p><a name="16762"></a>
+2. Click on the security icon <p><a name="16763"></a>
+3. Under Certificates, Click on Yours. <p><a name="16764"></a>
+4. If there is a certificate, export it. Otherwise, click Get a Certificate. <p><a name="16765"></a>
+A certificate will be exported to PKCS12 format. <p>
+<a name="16766"></a>
+<h3> Using a PKCS12 Key in the J2EE SDK</h3>
+<a name="16767"></a>
+A PKCS12 format key must be converted into <code>.jks</code> format for use in the J2EE SDK. The <code>keytool -pkcs12</code> command lists the options that allow you to import a PKCS12 file. The keystore password for the <code>.jks</code> file should be the one used for the J2EE keystore. <p><a name="16768"></a>
+The command for the conversion is: <p><blockquote>
+<pre><a name="16769"></a>keytool -pkcs12 -pkcsFile fileName -pkcsKeyStorePass password -
+pkcsKeyPass password -jksFile outputFileName -jksKeyStorePass 
+password
+</pre>
+</blockquote><a name="16770"></a>
+The result is a <code>.jks</code> file that has the key -- the private key and the certificate chain -- in the file. <p>
+<a name="14702"></a>
+<h1>Memory Threshold for Passivation  </h1>
+<a name="13689"></a>
+When the EJB container passivates an enterprise bean, it saves the bean's state in secondary storage and attempts to reclaim memory. For stateful session beans, the Cloudscape database is used as secondary storage, so passivation will occur only if the Cloudscape database is started. By default passivation occurs only when memory usage in the server exceeds 128 megabytes. To change the default, you can modify the value of the <code>passivation.threshold.memory</code> property in the <code>config/default.properties</code> file: <p><blockquote>
+<pre><a name="14658"></a>passivation.threshold.memory=128000000
+</pre>
+</blockquote><a name="14661"></a>
+This property indicates the memory usage threshold in bytes after which the container will start passivating beans. The value must be a positive integer. If you decrease the value of this property then passivation will occur more often. <p>
+<a name="14223"></a>
+<h1>JMS Settings  </h1>
+<a name="14225"></a>
+The following tables list some of the JMS properties in the files of the <code>config</code> directory.<p><a name="14235"></a>
+ 
+<Table Border="3">
+<caption><a name="14242"></a>
+TABLE 2 	 JMS Settings in <code>default.properties</code><p>
+</caption>
+<tr><th><a name="14246"></a>
+ Property Name<p>
+<th><a name="14248"></a>
+ Description<p>
+
+<tr><td><a name="14250"></a>
+messagebean.pool.size
+<td><a name="14252"></a>
+Specifies the maximum number of instances of an mdb type. You cannot specify different pool sizes for different mdb types.
+
+<tr><td><a name="14254"></a>
+messagebean.max.serversessionmsgs
+<td><a name="14256"></a>
+Normally, when traffic is light, a ConnectionConsumer gets a ServerSession from its pool, loads it with a single message, and starts it. As traffic picks up, messages can back up. If this happens, a ConnectionConsumer can load each ServerSession with more than one message. This reduces the thread context switches, and minimizes resource use at the expense of some serialization of message processing. This release only supports the value 1.
+
+
+</Table>
+
+<Table>
+<tr><td>
+</Table>
+<p><a name="14236"></a>
+<p><a name="14342"></a>
+ 
+<Table Border="3">
+<caption><a name="14480"></a>
+TABLE 3 	 JMS Settings in <code>jms_service.properties</code><p>
+</caption>
+<tr><th><a name="14484"></a>
+ Property Name<p>
+<th><a name="14486"></a>
+ Description<p>
+
+<tr><td><a name="14488"></a>
+com.sun.jms.internal.java.naming.*
+<td><a name="14490"></a>
+Specifies the JNDI provider.
+
+<tr><td><a name="14492"></a>
+com.sun.jms.client.transport_preference
+<td><a name="14494"></a>
+Specifies the service used by the clients to communicate with the JMS service. The only supported value is IIOP. This value should not be modified.
+
+<tr><td><a name="14496"></a>
+com.sun.jms.service.bindAdministeredObjects
+<td><a name="14498"></a>
+Specifies whether or not the service should bind two default ConnectionFactory objects. This value should not be modified.
+
+<tr><td><a name="14500"></a>
+com.sun.jms.service.jdbc.*
+<td><a name="14502"></a>
+Specifies the JDBC provider. Currently set to Cloudscape, these values should not be modified.
+
+<tr><td><a name="14504"></a>
+com.sun.jms.default.loglevel
+<td><a name="14506"></a>
+Specifies the default log level. Valid settings are SEVERE, WARNING, INFO, FINE, FINER, FINEST
+
+<tr><td><a name="14508"></a>
+com.sun.jms.service.client_reaper_interval
+<td><a name="14510"></a>
+Specifies in minutes how often the JMS service should look for clients that have not closed their resources properly.
+
+
+</Table>
+
+<Table>
+<tr><td>
+</Table>
+<p><a name="14320"></a>
+<p><a name="14457"></a>
+ 
+<Table Border="3">
+<caption><a name="14442"></a>
+TABLE 4 	 JMS Settings in <code>jms_client.properties</code><p>
+</caption>
+<tr><th><a name="14446"></a>
+ Property Name<p>
+<th><a name="14448"></a>
+ Description<p>
+
+<tr><td><a name="14450"></a>
+com.sun.jms.internal.java.naming.*
+<td><a name="14452"></a>
+Specifies the JNDI provider.
+
+<tr><td><a name="14472"></a>
+com.sun.jms.client.transport_preference
+<td><a name="14474"></a>
+Specifies the service used by the clients to communicate with the JMS service. The only supported value is IIOP. This value should not be modified.
+
+<tr><td><a name="14476"></a>
+com.sun.jms.default.loglevel
+<td><a name="14478"></a>
+Specifies the default log level. Valid settings are SEVERE, WARNING, INFO, FINE, FINER, FINEST
+
+
+</Table>
+
+<Table>
+<tr><td>
+</Table>
+<p><a name="14322"></a>
+<p><a name="14323"></a>
+<p><a name="9331"></a>
+<p>
+
+<br>
+
+
+<hr>
+
+
+<hr>
+<p>
+<a href="Copyright.html">
+<font size=-1><i>Copyright &#169; 2002 Sun Microsystems, Inc.  
+All rights reserved.</i></font></a>
+
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<h2>RUBBoS client emulator - (C) Rice University/INRIA 2001</h2><p>
+
+<h3>Test date: 2018-12-20 13:28:03</h3><br>
+
+<A HREF="#config">Test configuration</A><br>
+<A HREF="trace_client0.html">Test trace</A><br>
+<A HREF="perf.html">Test performance report</A><br><p>
+<p><hr><p>
+<CENTER><A NAME="config"></A><h2>*** Test configuration ***</h2></CENTER>
+Looking for rubbos.properties in classpath (rubbos_client.jar:.)<p>
+
+<h3>### HTTP server information ###</h3>
+Server name       : 192.168.110.3<br>
+Server port       : 31111<br>
+Servlets server name : 192.168.110.3<br>
+CJDBC server name : <br>
+EJB HTML files path   : <br>
+EJB Script files path : <br>
+Servlets HTML files path   : /rubbos<br>
+Servlets Script files path : /rubbos/servlet<br>
+Servlets HTML files path   : /PHP<br>
+PHP Script files path : /PHP<br>
+
+<h3><br>### Workload ###</h3>
+Remote client nodes            : 1<br>
+Remote client command          : java -classpath .:/tmp/RUBBoS/Client/:/tmp/RUBBoS/Client/rubbos_client.jar -Xms128m -Xmx1024m -Dhttp.keepAlive=true -Dhttp.maxConnections=1000000 edu.rice.rubbos.client.ClientEmulator<br>
+Number of clients              : 900<br>
+User transition table          : /tmp/RUBBoS/workload/user_transitions.txt<br>
+Author transition table        : /tmp/RUBBoS/workload/author_transitions.txt<br>
+Number of columns              : 24<br>
+Number of rows                 : 26<br>
+Maximum number of transitions  : 1000<br>
+Number of stories per page     : 20<br>
+Think time                     : TPCW compatible with 7s mean<br>
+Up ramp time in ms             : 150000<br>
+Up ramp slowdown factor        : 2.0<br>
+Session run time in ms         : 900000<br>
+Down ramp time in ms           : 150000<br>
+Down ramp slowdown factor      : 3.0<br>
+Percentage of authors          : 10<br>
+Error while checking database.properties: Can't find resource for bundle java.util.PropertyResourceBundle, key database_master_server

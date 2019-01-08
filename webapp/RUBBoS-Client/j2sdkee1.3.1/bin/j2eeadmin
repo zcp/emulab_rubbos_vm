@@ -1,0 +1,13 @@
+#!/bin/sh
+
+#
+# Copyright 2002 Sun Microsystems, Inc. All rights reserved.
+# SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+#
+
+BINDIR=`dirname $0`
+. $BINDIR/setenv.sh
+
+OPTIONS="-Dcom.sun.enterprise.home=$J2EE_HOME"
+
+$JAVA_HOME/bin/java $OPTIONS -classpath "$CPATH" com.sun.enterprise.tools.admin.AdminTool "$@"

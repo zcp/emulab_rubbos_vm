@@ -1,0 +1,13 @@
+#!/bin/sh
+
+#
+# Copyright 2002 Sun Microsystems, Inc. All rights reserved.
+# SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+#
+
+BINDIR=`dirname $0`
+. $BINDIR/setenv.sh
+
+ACTIVATION=" -Dcom.sun.enterprise.home=$J2EE_HOME -Djms.home=$JMS_HOME -Djms.properties=$J2EE_HOME/config/jms_client.properties -Djava.security.policy=$J2EE_HOME/lib/security/client.policy -Djava.security.auth.login.config=$J2EE_HOME/lib/security/clientlogin.config "
+
+$JAVACMD $ACTIVATION $VMARGS -classpath "$CPATH:$APPCPATH" com.sun.enterprise.appclient.Main "$@"

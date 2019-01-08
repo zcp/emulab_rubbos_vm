@@ -1,0 +1,12 @@
+
+
+ssh $master_host "./init_kubernetes.sh"
+#ssh $master_host "sudo kubectl create -f webapp/httpd-service.yaml"
+#ssh $master_host "sudo kubectl create -f webapp/tomcat-service.yaml"
+#ssh $master_host "sudo kubectl create -f webapp/mysql-service.yaml"
+
+#ssh $master_host "sudo kubectl create -f webapp/httpd-controller.yaml"
+#ssh $master_host "sudo kubectl create -f webapp/mysql-controller.yaml"
+#ssh $master_host "sudo kubectl create -f webapp/tomcat-controller.yaml"
+#ssh $master_host "sudo kubectl create -f webapp/rubbos-client-controller.yaml"
+

@@ -1,0 +1,464 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<title></title>
+</head>
+<body bgcolor=#ffffff>
+<hr>
+<br>
+ 
+<a name="16695"></a>
+<font size=-1>
+<a href="../index.html">J2EE Doc Bundle Home</a>
+</font>
+<br>
+<hr>
+<TABLE BORDER="0" WIDTH="100%">
+<TR>
+<TD width=60>
+<IMG SRC="javalogo52x88.gif" ALT="Java" width=52>
+</TD>
+<TD align=center>
+<h1>
+Java<font size=-1><sup>TM</sup></font> 2 SDK, Enterprise Edition 1.3.1 Release Notes 
+</h1>
+
+</TD>
+<TD width=60>
+&nbsp;
+</TD>
+</TR>
+</TABLE>
+
+<hr>
+<br>
+<a name="14145"></a>
+Revised: 1/10/02<p>
+<a name="13552"></a>
+<h1>Contents  </h1>
+
+<ul><a name="18882"></a>
+<li><a href="ReleaseNotes.html#18760">Beginning with the J2EE<font size=-1><sup>TM</sup></font> SDK</a><br><br>
+<a name="18906"></a>
+<li><a href="ReleaseNotes.html#14860">What's New in J2EE SDK 1.3.1</a><br><br>
+<a name="18901"></a>
+<li><a href="ReleaseNotes.html#19014">Patch Release 1.3_01</a><br><br>
+<a name="19106"></a>
+<li><a href="ReleaseNotes.html#19078">New Features in J2EE SDK 1.3</a><br><br>
+<a name="10649"></a>
+<li><a href="ReleaseNotes.html#10584">Supported Platforms</a><br><br>
+<a name="10659"></a>
+<li><a href="ReleaseNotes.html#9704">Supported Databases and JDBC<font size=-1><sup>TM</sup></font> Drivers</a><br><br>
+<a name="10662"></a>
+<li><a href="ReleaseNotes.html#9712">What This Release Includes</a><br><br>
+<a name="10667"></a>
+<li><a href="ReleaseNotes.html#9771">Required Software</a><br><br>
+<a name="10686"></a>
+<li><a href="ReleaseNotes.html#11648">Current Limitations</a><br><br>
+<a name="10691"></a>
+<li><a href="ReleaseNotes.html#16364">Known Bugs</a><br><br>
+<a name="14921"></a>
+<li><a href="ReleaseNotes.html#14269">Differences Between Tomcat and the J2EE SDK</a><br><br>
+<a name="15830"></a>
+<li><a href="ReleaseNotes.html#15067">Linux Notes</a><br><br>
+<a name="16408"></a>
+<li><a href="ReleaseNotes.html#15815">Interoperability Between EJB<font size=-1><sup>TM</sup></font> Containers</a><br><br>
+<a name="17509"></a>
+<li><a href="ReleaseNotes.html#17331">Container-Managed Persistence 2.0</a><br><br>
+<a name="19116"></a>
+<li><a href="ReleaseNotes.html#19213">deploytool Enhancements</a><br><br>
+<a name="19273"></a>
+<li><a href="ReleaseNotes.html#19234">New Treatment of Non-XA Data Transactions</a><br><br>
+</ul>
+<a name="18760"></a>
+<h1>Beginning with the J2EE<font size=-1><sup>TM</sup></font> SDK  </h1>
+<a name="10585"></a>
+First time users of the Java<font size=-1><sup>TM</sup></font> 2 SDK, Enterprise Edition (J2EE<font size=-1><sup>TM</sup></font> SDK) should follow these steps:<p><a name="15384"></a>
+1. Read the Installation Instructions to find out how to set the <code>J2EE_HOME</code> and <code>JAVA_HOME</code> environment variables. The Installation Instructions are on our web site and may be reached by a link on the J2EE SDK download page.<p><a name="15380"></a>
+2. Install the software that the Java<font size=-1><sup>TM</sup></font> 2 SDK, Enterprise Edition relies on. See the <a href="ReleaseNotes.html#9771">Required Software</a> section of this document.<p><a name="10597"></a>
+3. Go to the J2EE Tutorial to learn how to use the J2EE SDK. The J2EE Tutorial is found at:<p><blockquote>
+<pre><a name="16665"></a>http://java.sun.com/j2ee/tutorial/index.html
+</pre>
+</blockquote><a name="14858"></a>
+<a name="whatsnew"></a><p>
+<a name="14860"></a>
+<h1>What's New in J2EE SDK 1.3.1  </h1>
+<a name="18893"></a>
+The 1.3.1 release of the J2EE SDK is an incremental release adding the following new features to the FCS 1.3 release:<p>
+<ul><a name="19409"></a>
+<li>Additional testing of J2EE components by the <code>verifier</code><br><br>
+<a name="18952"></a>
+<li>Improved handling of non-XA transactions resulting in a vast performance improvement; see <a href="ReleaseNotes.html#19234">New Treatment of Non-XA Data Transactions</a><br><br>
+<a name="19009"></a>
+<li>Several deploytool Enhancements; see <a href="ReleaseNotes.html#19213">deploytool Enhancements</a><br><br>
+<a name="19023"></a>
+<li>Performance improvements for start up, deployment, naming, and running enterprise beans<br><br>
+</ul>
+<a name="19014"></a>
+<h1>Patch Release 1.3_01  </h1>
+<a name="18916"></a>
+Patch release 1.3_01 updated the 1.3 FCS release to correct problems that affected the portability of applications developed with the J2EE SDK:<p>
+<ul><a name="18917"></a>
+<li>SDK tools generated incorrect values for the "multiplicity" element for relationships in the XML deployment descriptor for Container Managed Persistence (CMP) 2.0. <br><br>
+<a name="19060"></a>
+<li>SDK tools incorrectly generated a "query" element in the XML deployment descriptor for CMP 1.1 entity beans (still supported for compatibility), which do not have the query feature of CMP 2.0 entity beans. <br><br>
+<a name="19071"></a>
+<li>SDK tools incorrectly generated a "container transaction" element in the XML deployment descriptor for the <code>getHandle</code> method for entity beans. <br><br>
+</ul>
+<a name="19078"></a>
+<h1>New Features in J2EE SDK 1.3  </h1>
+<a name="14862"></a>
+The 1.3 FCS release of the J2EE SDK was a major release that implemented the following new features:<p>
+<ul><a name="15889"></a>
+<li>Java<font size=-1><sup>TM</sup></font> Messaging Service (JMS<font size=-1><sup>TM</sup></font>)<br><br>
+<a name="15890"></a>
+<li>J2EE Connector Architecture<br><br>
+<a name="15905"></a>
+<li>Java API for XML Parsing (JAXP) <br><br>
+<a name="15907"></a>
+<li>Java Servlet new features: <br><br>
+
+
+<ul>
+<a name="15922"></a>
+<li>filters, a lightweight framework for transforming requests and responses<br><br>
+<a name="15930"></a>
+<li>mechanisms for monitoring application lifecycle events <br><br>
+<a name="15935"></a>
+<li>better support for internationalization<br><br>
+</ul>
+<a name="15908"></a>
+<li>JavaServer Pages<font size=-1><sup>TM</sup></font> new features:<br><br>
+
+
+<ul>
+<a name="15936"></a>
+<li>improved runtime support for tag libraries<br><br>
+<a name="15938"></a>
+<li>translation-time JSP<font size=-1><sup>TM</sup></font> page validation<br><br>
+</ul>
+<a name="15909"></a>
+<li>Enterprise JavaBeans<font size=-1><sup>TM</sup></font> (EJB<font size=-1><sup>TM</sup></font>) new features:<br><br>
+
+
+<ul>
+<a name="15946"></a>
+<li>Message-driven enterprise beans<br><br>
+<a name="16450"></a>
+<li>Interoperability between EJB containers<br><br>
+<a name="16451"></a>
+<li><a href="ReleaseNotes.html#17331">Container-Managed Persistence 2.0</a><br><br>
+</ul>
+</ul>
+<a name="10584"></a>
+<h1>Supported Platforms  </h1>
+<a name="19079"></a>
+The 1.3.1 release of the J2EE SDK continues to support the following platforms:<p>
+<ul><a name="13643"></a>
+<li>Solaris<font size=-1><sup>TM</sup></font> 7 Operating Environment<br><br>
+<a name="19490"></a>
+<li>Solaris<font size=-1><sup>TM</sup></font> 8 Operating Environment<br><br>
+<a name="9702"></a>
+<li>Windows NT, v. 4.0<br><br>
+<a name="15703"></a>
+<li>Windows 2000 Professional<br><br>
+<a name="15704"></a>
+<li>Linux Redhat, v. 6.2<br><br>
+</ul><a name="11744"></a>
+<a name="jdbc"></a><p>
+<a name="9704"></a>
+<h1>Supported Databases and JDBC<font size=-1><sup>TM</sup></font> Drivers  </h1>
+<a name="9969"></a>
+The 1.3.1 release supports database drivers that conform to versions 1.0 and 2.0 of the JDBC API. We have performed tests with the following database servers:<p>
+<ul><a name="9970"></a>
+<li>Oracle8 Server, v. 8.16<br><br>
+<a name="9971"></a>
+<li>Microsoft SQL Server, v. 7.0<br><br>
+<a name="13648"></a>
+<li>Cloudscape, v. 4.0.6<br><br>
+</ul><a name="11750"></a>
+For more information on JDBC technology, see the <a href="http://www.java.sun.com/products/jdbc/index.html">JDBC Data Access API</a> web page. For a list of links to driver vendors, see the <a href="http://www.java.sun.com/products/jdbc/jdbc.drivers.html">JDBC Technology Drivers</a> page. <p><a name="19222"></a>
+After you've installed your driver, follow the instructions in the JDBC Drivers section of the <a href="ConfigGuide.html">Configuration Guide</a> to configure the driver for use with the J2EE SDK. If you are using the Cloudscape DBMS included in this release, you do not have to configure its driver.<p><a name="19284"></a>
+See the section <a href="ReleaseNotes.html#19234">New Treatment of Non-XA Data Transactions</a>, for additional driver related information.<p>
+<a name="9712"></a>
+<h1>What This Release Includes  </h1>
+<a name="9714"></a>
+The 1.3.1 release of the Java<font size=-1><sup>TM</sup></font> 2 SDK, Enterprise Edition includes the following software.<p>
+<a name="9717"></a>
+<h2> J2EE Server</h2>
+<a name="12400"></a>
+The J2EE server supports the following J2EE APIs and technologies:<p>
+<ul><a name="11815"></a>
+<li>HTTP and HTTPS<br><br>
+<a name="12391"></a>
+<li>COS naming <br><br>
+<a name="18032"></a>
+<li>Enterprise JavaBeans<font size=-1><sup>TM</sup></font> (EJB<font size=-1><sup>TM</sup></font>) 2.0 <br><br>
+<a name="18033"></a>
+<li>Java<font size=-1><sup>TM</sup></font> Servlets 2.3<br><br>
+<a name="18034"></a>
+<li>JavaServer Pages<font size=-1><sup>TM</sup></font> (JSP<font size=-1><sup>TM</sup></font>) 1.2<br><br>
+<a name="18035"></a>
+<li>Java Messaging Service (JMS<font size=-1><sup>TM</sup></font>) 1.0.2<br><br>
+<a name="18036"></a>
+<li>J2EE Connector 1.0<br><br>
+<a name="18037"></a>
+<li>JDBC<font size=-1><sup>TM</sup></font> Standard Extension 2.0<br><br>
+<a name="18040"></a>
+<li>Java Transaction API (JTA) 1.0<br><br>
+<a name="18041"></a>
+<li>JavaMail<font size=-1><sup>TM</sup></font> 1.2<br><br>
+<a name="18042"></a>
+<li>Java API for XML Parsing (JAXP) 1.1<br><br>
+</ul>
+<a name="9736"></a>
+<h2> Tools</h2>
+
+<ul><a name="9738"></a>
+<li>Administration Tool<br><br>
+<a name="15867"></a>
+<blockquote>The <code>j2eeadmin</code> utility adds JDBC drivers, JMS destinations, and connection factories for various resources.</blockquote>
+<a name="15866"></a>
+<li>Application Deployment Tool<br><br>
+<a name="9740"></a>
+<blockquote>The <code>deploytool</code> utility packages J2EE components and deploys J2EE applications. In the 1.3.1 release it receives an enhanced update function and intelligent field completion.</blockquote>
+<a name="18050"></a>
+<li>Key Tool<br><br>
+<a name="18093"></a>
+<blockquote>The <code>keytool</code> utility creates public and private keys and generates X509 self-signed certificates. The J2EE SDK version is a wrapper for the J2SE SDK version, but adds an option for the format conversion of PKCS12 certificates. </blockquote>
+<a name="18119"></a>
+<li>Realm Tool<code> </code><br><br>
+<a name="18149"></a>
+<blockquote>The <code>realmtool</code> utility manages users for the J2EE server.</blockquote>
+<a name="12409"></a>
+<li>Verifier<br><br>
+<a name="12410"></a>
+<blockquote>The <code>verifier</code> utility validates J2EE component files.</blockquote>
+<a name="13014"></a>
+<li>Packager<br><br>
+<a name="13015"></a>
+<blockquote>The <code>packager</code> utility packages J2EE components.</blockquote>
+<a name="13030"></a>
+<li>Cleanup Script<br><br>
+<a name="13031"></a>
+<blockquote>The <code>cleanup</code> utility deletes all deployed J2EE applications.</blockquote>
+</ul><a name="18091"></a>
+Additional information about these tools can by found by consulting the <a href="ToolsOnly.html">J2EE SDK Tools</a> document included with this bundle.<p>
+<a name="13026"></a>
+<h2> Cloudscape DBMS</h2>
+<a name="13027"></a>
+This release includes Cloudscape (v. 4.0.6), a relational DBMS written in the Java<font size=-1><sup>TM</sup></font> programming language. Although the documented code examples were tested with a Cloudscape database, you may use any database that meets the requirements described in the section, <a href="ReleaseNotes.html#9704">Supported Databases and JDBC<font size=-1><sup>TM</sup></font> Drivers</a>.<p><a name="15124"></a>
+<a name="requiredsoftware"></a><p>
+<a name="9771"></a>
+<h1>Required Software  </h1>
+<a name="9773"></a>
+The Java 2 SDK, Enterprise Edition (J2EE) requires you to install the <a href="http://java.sun.com/j2se/index.html">Java 2 SDK, Standard Edition</a> (J2SE<font size=-1><sup>TM</sup></font>). You need the J2SE SDK to run the J2EE server and to build and run J2EE applications. If your J2EE application client resides on a different machine than the J2EE server, then you must install the J2SE SDK on both the server and client machines. (This rule applies only to J2EE application clients, not to Web browser clients.)<p><a name="12507"></a>
+This release of the J2EE SDK requires the versions of the J2SE SDK listed in the following table:<p><a name="14182"></a>
+ 
+<Table Border="3">
+<caption><a name="14186"></a>
+TABLE 1 	 Required Versions of the J2SE SDK<p>
+</caption>
+<tr><th><a name="14190"></a>
+ Operating System<p>
+<th><a name="14192"></a>
+ J2SE SDK Version<p>
+
+<tr><td><a name="14194"></a>
+Solaris<font size=-1><sup>TM</sup></font> 7 Operating Environment<br>Solaris<font size=-1><sup>TM</sup></font> 8 Operating Environment
+<td><a name="14196"></a>
+1.3.1_02 
+
+<tr><td><a name="14198"></a>
+Windows NT 4.0,<br>Windows 2000 Professional
+<td><a name="14200"></a>
+1.3.1_02
+
+<tr><td><a name="15707"></a>
+Linux Redhat, v. 6.2
+<td><a name="15709"></a>
+1.3.1_02
+
+
+</Table>
+
+<Table>
+<tr><td>
+</Table>
+<p><a name="12529"></a>
+Note: Versions of the J2SE SDK not listed in the preceding table have not been tested and are not supported. For example, the J2SE SDK v. 1.2 will not work with this release of the J2EE SDK.<p>
+<a name="11648"></a>
+<h1>Current Limitations  </h1>
+<a name="9823"></a>
+The purpose of the J2EE<font size=-1><sup>TM</sup></font> SDK is to introduce you to Java 2 Enterprise Edition technology and to provide you with an opportunity to give us feedback on the work we've done so far. This release has several limitations. <p>
+<a name="18344"></a>
+<h2> Multi-byte Character String Support</h2>
+<a name="18345"></a>
+The current release does not support the use of multi-byte strings in EJB class names and JNDI names.<p>
+<a name="15888"></a>
+<h2> Database Calls During Result Set Iteration</h2>
+<a name="9846"></a>
+With some JDBC drivers you cannot access the database while iterating through a result set. In the following code example, the <code>stmt.executeUpdate</code> call will fail:<p><blockquote>
+<pre><a name="9850"></a>String query = "SELECT DEPTNO FROM DEPT . . .";
+<a name="9851"></a>String update = "UPDATE EMPLOYEE . . .";
+<a name="9852"></a>ResultSet rs = stmt.executeQuery(query);
+<a name="9853"></a>while (rs.next()) {
+<a name="9854"></a>   String s = rs.getString("DEPTNO");
+<a name="9855"></a>   // The following statement will FAIL:
+<a name="9856"></a>   stmt.executeUpdate(update);
+<a name="9857"></a>   . . .
+<a name="9858"></a>}
+</pre>
+</blockquote><a name="9860"></a>
+You may be able to get around this limitation by trying the following approaches:<p><a name="9863"></a>
+1. Use a stored procedure that contains the same SQL calls.<p><a name="9865"></a>
+2. Substitute an iteration with a single SQL statement that contains a subquery. Here's an example:<p><blockquote>
+<pre><a name="9869"></a>String update = "UPDATE EMPLOYEE
+<a name="9870"></a>    SET DEPTNO =
+<a name="9871"></a>      (SELECT DEPTNO FROM DEPT
+<a name="9872"></a>       WHERE LOC = `ATLANTA')
+<a name="9873"></a>   WHERE TITLE = `ENGINEER'";
+</pre>
+</blockquote><a name="9875"></a>
+3. Call another method that issues the second SQL statement. The method must use the RequiresNew transaction attribute. If you try this approach, you should be aware that the second SQL statement is executed in another transaction. Therefore, if the second transaction fails, you need to mark the first transaction for rollback.<p>
+<a name="11928"></a>
+<h2> Scalability and Memory Requirements </h2>
+<a name="11932"></a>
+The minimum memory requirement is 128 MB of memory. We recommend 256 MB for larger applications.<p><a name="18072"></a>
+In the J2SE 1.3.1 softeare, an <code>OutOfMemoryError</code> can result when a very large number of classes are loaded by the Java virtual machine, even when there are free spaces on the Java heap. Workaround: Edit <code>bin/setenv.sh</code> or <code>bin/setenv.bat</code> to add the following option to the <code>JAVACMD</code> variable:<p><blockquote>
+<pre><a name="18073"></a>-XX:MaxPermSize=256M
+</pre>
+</blockquote><a name="18074"></a>
+See also<p><blockquote>
+<pre><a name="18075"></a>http://developer.java.sun.com/developer/bugParade/bugs/4390238
+</pre>
+</blockquote>
+<a name="18071"></a>
+<h2> Common Development Environment</h2>
+<a name="12689"></a>
+Each developer should work with his or her own J2EE SDK installation. Multiple developers should not share the same J2EE server.<p>
+<a name="15445"></a>
+<h2> RMI-IIOP and JAXP Standard Extensions</h2>
+<a name="15453"></a>
+The J2EE SDK will not work with a J2SE installation which has the RMI-IIOP and JAXP standard extensions. The <code>j2ee.jar</code> file of the J2EE SDK already has the RMI-IIOP and JAXP classes. Workaround: Use a fresh J2SE installation without the standard extensions.<p>
+<a name="16364"></a>
+<h1>Known Bugs  </h1>
+<a name="14607"></a>
+ 
+<Table Border="3">
+<caption><a name="18558"></a>
+TABLE 2 	 Known Bugs for This Release<p>
+</caption>
+<tr><th><a name="18562"></a>
+ Bug ID<p>
+<th><a name="18564"></a>
+ Description<p>
+
+<tr><td><a name="18574"></a>
+4461245
+<td><a name="18576"></a>
+The SQL generator in the deploytool generates database table names for storing the persistent state of CMP entity beans. The table name is based on the bean class name. If there are two or more beans with the same bean class name (in the same EAR or in multiple deployed EARs), the table names will conflict.  Workarounds: Use different datasources for storing beans in different EARs. Or, change the table names in the generated SQL statements in the Deployment Settings dialog for entity beans.
+
+<tr><td><a name="19724"></a>
+4533469 
+<td><a name="19777"></a>
+RMIC generates an incorrect stub when compiling an EJB remote interface of the following form:
+<a name="19805"></a>
+
+<a name="19808"></a>
+<pre>
+<a name="19806"></a>
+public interface Foo extends EJBObject {
+<a name="19796"></a>
+  public boolean isFoo() throws RemoteException;
+<a name="19797"></a>
+  ...
+<a name="19798"></a>
+}
+<a name="19793"></a>
+</pre>
+<a name="19741"></a>
+
+<a name="19795"></a>
+This bug only occurs when the method name is of the form is&lt;Name&gt; where &lt;Name&gt; is the name of the EJB remote interface. In addition, the method takes no arguments and returns a boolean.  When this method is called, the system may throw a <code>CORBA BAD_OPERATION</code> exception. Workaround: Rename the interface name or the method name.
+
+
+</Table>
+
+<Table>
+<tr><td>
+</Table>
+<p><a name="14608"></a>
+<p>
+<a name="14269"></a>
+<h1>Differences Between Tomcat and the J2EE SDK  </h1>
+<a name="14897"></a>
+Tomcat is an implementation of the JavaServer Pages and Servlet specifications. This version of the J2EE SDK includes Tomcat version 4.0.2. <p><a name="18080"></a>
+Note: The Tomcat implementation in the J2EE SDK might be slightly different from the version of Tomcat 4.0.2 distributed separately because of different release schedules. For more information about Tomcat, please see <a href="http://jakarta.apache.org/">http://jakarta.apache.org/</a>.<p>
+<a name="15067"></a>
+<h1>Linux Notes  </h1>
+
+<a name="15778"></a>
+<h2> Port Conflicts</h2>
+<a name="15790"></a>
+The network services of Redhat 6.2 (with Gnome) and the Eudora e-mail client use port 1050. By default, the J2EE server also uses this port. If this port conflict occurs, you will see the following error message when you start the J2EE server in verbose mode:<p><blockquote>
+<pre><a name="19716"></a>j2ee -verbose
+<a name="19718"></a>. . .
+<a name="15779"></a>J2EE server Listen Port: = 1050
+<a name="15781"></a>java.lang.RuntimeException: 
+<a name="15786"></a>Could not initialize j2ee server. 
+<a name="15787"></a>Possible cause could be another instance of the server already 
+running.
+<a name="15788"></a>. . .
+</pre>
+</blockquote><a name="15789"></a>
+To fix this problem, change the default port numbers in the <code>$J2EE_HOME/config/orb.properties</code> file. For example, you can add a zero to each port number in the <code>orb.properties</code> file:<p><blockquote>
+<pre><a name="15811"></a>port=10590
+<a name="15813"></a>host=localhost
+</pre>
+</blockquote>
+<a name="15815"></a>
+<h1>Interoperability Between EJB<font size=-1><sup>TM</sup></font> Containers  </h1>
+<a name="16079"></a>
+Starting with version 1.3, the J2EE SDK implements all requirements for EJB container interoperability as defined by the Enterprise JavaBeans 2.0 specifications. With this interoperability feature, enterprise beans in the J2EE SDK can communicate with clients that run on application servers provided by other vendors, as long the application servers implement the specified interoperability requirements. The clients can include servlets, JSP pages, J2EE application clients, and enterprise beans.<p><a name="16100"></a>
+To communicate with an enterprise bean running on the J2EE SDK server, the client running on an application server provided by another vendor must have the<code> j2ee-ri-svc.jar</code> file in its class path. <p><a name="17936"></a>
+A client is running on the J2EE SDK server doe not need the <code>j2ee-ri-svc.jar</code> file to communicate with an enterprise bean on an application server provided by another vendor.<p><a name="16121"></a>
+The <code>j2ee-ri-svc.jar</code> file is located in the <code>lib</code> directory of the J2EE SDK installation. It contains portable system value classes such as implementations of <code>javax.ejb.Handle</code> and <code>javax. ejb.EJBMetaData</code>. These implementations are specific to the J2EE SDK.<p><a name="16076"></a>
+For more information on EJB container interoperability, please refer to section 19.2 of the Enterprise JavaBeans 2.0 specifications. A link to the specifications may be found on the J2EE SDK download page.<p>
+<a name="17331"></a>
+<h1>Container-Managed Persistence 2.0  </h1>
+<a name="17333"></a>
+The architecture for container managed persistence (CMP) was enhanced in the J2EE SDK 1.3 release. Please see the EJB 2.0 specifications for details.<p><a name="17339"></a>
+Note that the persistence manager in the J2EE SDK only supports forward mapping of a CMP 2.0 abstract schema to a relational database. Using the J2EE SDK's tools, it is not possible to reverse map from existing database tables to a CMP 2.0 abstract schema.<p>
+<a name="19213"></a>
+<h2> deploytool Enhancements</h2>
+<a name="19103"></a>
+In the 1.3.1 J2EE SDK release, the <code>deploytool</code> has an enhanced update function. The update function now locates files for inclusion in the deployed application by using search paths that are provided by the user. If some files are not found, the user is shown a split screen with the found files listed in the upper half of the Entries Changed dialog. Clicking on a file in the list displays the path used for locating the file. The user can verify that the intended file has been found, or edit the search path to bring in the correct file. <p><a name="19177"></a>
+Files that have not been found are listed in the lower half of the dialog, under Entries Not Found on Diskn. Files can be moved into the found category by editing the search path so that they will be located by the program.<p><a name="19180"></a>
+The screen for editing search paths is accessed by clicking the Edit Path button on the dialog.<p>
+<a name="19185"></a>
+<h2> Other Improvements</h2>
+<a name="19186"></a>
+The <code>deploytool</code> has been improved in other, less visible ways. Intelligent field completion has been enhanced with improved filtering of local/remote interfaces and with the automatic entry of primary key classes for Container Managed Persistence (CMP) 2.0.<p>
+<a name="19234"></a>
+<h1>New Treatment of Non-XA Data Transactions  </h1>
+<a name="19237"></a>
+In the 1.3.1 release of the J2EE SDK, transactions using non-XA data-sources are treated as local transactions in order to improve performance. <p><a name="19268"></a>
+Note &#175;  Database drivers that support XA data-sources allow you to connect to multiple databases and to distribute transactions across machines or processes. JDBC 1.0 drivers do not support XA data sources. Some JDBC 2.0 drivers support XA data-sources and some do not. See the <a href="ConfigGuide.html">Configuration Guide</a> for information about the installation of XA and non-XA drivers.<p>
+<a name="19238"></a>
+A local transaction is restricted to the use of exactly one non-XA data-source and to transactions that are completed within one Java virtual machine. Thus, a global transaction is not started and there is no need to go to the JTS layer. The resulting optimization results in a vast improvement in performance of begin/commit operations. With a local transaction there is no need for two-phase commits. The use of multiple non-XA data-sources or multiple Java virtual machines would require two-phase commits.<p><a name="19240"></a>
+Breaking out local transactions will allow many uses of non-XA data-sources to be optimized. When two non-XA data sources are needed, they can be used by declaring them to be XA data sources in the J2EE SDK's <code>resource.properties</code> file.<p><a name="19465"></a>
+If more than one resource is used in a transaction, non-XA data sources must not be used. (Examples of resources are relational databases accessed through the JDBC API, JMS queues and topics, and EISs accessed through the J2EE Connector architecture.) Instead, all resources must support XA transactions. It is illegal to use more than one non-XA data source in the same transaction.<p><a name="19247"></a>
+Previously, the J2EE SDK committed multiple non-XA data-sources without doing a two-phase commit. This non-compliant procedure could result in a loss or corruption of data.<p>
+
+<br>
+
+<hr>
+<p>
+<a href="Copyright.html">
+<font size=-1><i>Copyright &#169; 2002 Sun Microsystems, Inc.  
+All rights reserved.</i></font></a>
+
+
+</body>
+</html>

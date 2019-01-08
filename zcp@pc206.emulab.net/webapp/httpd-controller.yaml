@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: httpd-controller
+spec:
+  replicas: 1
+  selector:
+    app: httpd
+  template:
+    metadata:
+      labels:
+        app: httpd
+    spec:
+      containers:
+        #- image: myregistry.local:5000/httpd:latest
+        - image: docker.io/wuqingzcp/rubbos-webapp:emulab-httpd
+          name: httpd
+          resources:
+            limits:
+              cpu: "0.25"
+              memory: 1Gi
+          ports:
+          - containerPort: 80
+          volumeMounts:
+            - name: timezone
+              mountPath: /etc/localtime
+            - name: httpd-conf
+              mountPath: /usr/local/apache2/conf
+      nodeSelector:
+      #    diskspeed: slow
+        diskspeed: httpd
+      volumes:
+        - name: timezone
+          hostPath:
+            path: /usr/share/zoneinfo/America/New_York
+        - name: httpd-conf
+          hostPath:
+            path: /tmp/httpd-conf
+            #type: Directory

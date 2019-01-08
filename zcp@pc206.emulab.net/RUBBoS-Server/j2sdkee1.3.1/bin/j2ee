@@ -1,0 +1,14 @@
+#!/bin/sh
+
+#
+# Copyright 2002 Sun Microsystems, Inc. All rights reserved.
+# SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+#
+
+BINDIR=`dirname $0`
+. $BINDIR/setenv.sh
+
+SAX_PROPS=" -Dorg.xml.sax.parser=org.xml.sax.helpers.XMLReaderAdapter -Dorg.xml.sax.driver=org.apache.crimson.parser.XMLReaderImpl"
+PROPS=" $LISTEN_OPTIONS -Dcom.sun.enterprise.home=$J2EE_HOME  -Djms.home=$JMS_HOME -Dcom.sun.jms.service.jdbc.dbpath=$JMS_DB_PATH -Djms.properties=$J2EE_HOME/config/jms_service.properties -Djava.security.policy==$J2EE_HOME/lib/security/server.policy -Djava.security.auth.login.config=$J2EE_HOME/lib/security/serverlogin.config"
+
+$JAVACMD $SAX_PROPS $PROPS -classpath "$CPATH" com.sun.enterprise.server.J2EEServer "$@"

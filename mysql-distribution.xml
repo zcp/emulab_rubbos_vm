@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF8"?>
+<!DOCTYPE C-JDBC PUBLIC "-//ObjectWeb//DTD C-JDBC 2.0.2//EN" "http://c-jdbc.objectweb.org/dtds/c-jdbc-2.0.2.dtd">
+
+<C-JDBC>
+
+<VirtualDatabase name="rubbos">
+
+<Distribution>
+</Distribution>
+
+<AuthenticationManager>
+<Admin>
+<User username="admin" password="c-jdbc"/>
+</Admin> 
+<VirtualUsers>
+<VirtualLogin vLogin="root" vPassword="123456"/>
+</VirtualUsers>
+</AuthenticationManager>
+
+
+<DatabaseBackend name="mysql" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://192.168.110.3:31101:/rubbos" connectionTestStatement="select 1">
+<ConnectionManager vLogin="root" rLogin="root" rPassword="123456">
+<VariablePoolConnectionManager initPoolSize="10" minPoolSize="10" maxPoolSize="50" idleTimeout="30" waitTimeout="10"/>
+</ConnectionManager>
+</DatabaseBackend>
+
+<RequestManager>
+<RequestScheduler>
+<RAIDb-1Scheduler level="passThrough"/>
+</RequestScheduler>
+
+<LoadBalancer>
+<RAIDb-1>
+<WaitForCompletion policy="first"/>
+<RAIDb-1-LeastPendingRequestsFirst/>
+</RAIDb-1>
+</LoadBalancer>
+</RequestManager>
+
+</VirtualDatabase>
+
+</C-JDBC>
