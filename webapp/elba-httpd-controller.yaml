@@ -19,10 +19,10 @@ spec:
           #args: ["-k","start"]
           command: ["/usr/local/apache2/conf/start_apache.sh"]
           #args: [ "infinity" ] 
-          resources:
-            limits:
-              cpu: "1"
-              memory: 1Gi
+          #resources:
+          #  limits:
+          #    cpu: "1"
+          #    memory: 1Gi
           ports:
           - containerPort: 80
           volumeMounts:

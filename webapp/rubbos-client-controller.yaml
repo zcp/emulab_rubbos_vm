@@ -15,10 +15,10 @@ spec:
        #- image: myregistry.local:5000/rubbos-client:latest
        - image: wuqingzcp/rubbos-webapp:rubbos-client
          name: rubbos-client
-         resources:
-           limits:
-             cpu: "0.7"
-             memory: 1Gi
+         #resources:
+         #  limits:
+         #    cpu: "0.7"
+         #    memory: 1Gi
          volumeMounts:
            - name: timezone
              mountPath: /etc/localtime

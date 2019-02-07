@@ -15,10 +15,10 @@ spec:
         #- image: myregistry.local:5000/mysql-rubbos:latest
         - image: docker.io/wuqingzcp/rubbos-webapp:mysql
           name: mysql
-          resources:
-            limits:
-              cpu: "1"
-              memory: 1Gi
+          #resources:
+          #  limits:
+          #    cpu: "1"
+          #    memory: 1Gi
           ports:
           - containerPort: 3306
           env:
@@ -27,6 +27,9 @@ spec:
           volumeMounts:
             - name: database
               mountPath: /var/lib/mysql
+            - name: mysql-conf
+              mountPath: /etc/mysql/my.cnf
+              subPath: my.cnf
             - name: timezone
               mountPath: /etc/localtime
       nodeSelector:
@@ -36,7 +39,10 @@ spec:
         - name: database
           hostPath:
             #path: /home/zcp/database
-            path: /mydata/database
+            path: /database/database
+        - name: mysql-conf
+          hostPath:
+            path: /tmp/mysql-conf
         - name: timezone
           hostPath:
             path: /usr/share/zoneinfo/America/New_York

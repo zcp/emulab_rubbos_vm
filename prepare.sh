@@ -1,21 +1,22 @@
 #!/bin/bash
-master_host=zcp@pc265.emulab.net
-client_host=zcp@pc345.emulab.net
-httpd_host=zcp@pc353.emulab.net
-tomcat_host=zcp@pc322.emulab.net
-mysql_host=zcp@pc278.emulab.net
+master_host=zcp@pc309.emulab.net
+client_host=zcp@pc301.emulab.net
+httpd_host=zcp@pc296.emulab.net
+tomcat_host=zcp@pc300.emulab.net
+mysql_host=zcp@pc311.emulab.net
 
-master_ip=155.98.39.65
-client_ip=155.98.39.145
-httpd_ip=155.98.39.153
-tomcat_ip=155.98.39.122
-mysql_ip=155.98.39.78
+master_ip=155.98.39.109
+client_ip=155.98.39.101
+httpd_ip=155.98.39.96
+tomcat_ip=155.98.39.100
+mysql_ip=155.98.39.111
 
-master_hostname=master.zcp-qv45096.infosphere.emulab.net
-httpd_hostname=httpd.zcp-qv45096.infosphere.emulab.net
-tomcat_hostname=tomcat.zcp-qv45096.infosphere.emulab.net
-mysql_hostname=mysql.zcp-qv45096.infosphere.emulab.net
-client_hostname=client.zcp-qv45096.infosphere.emulab.net
+master_hostname=master.zcp-qv46266.infosphere.emulab.net
+client_hostname=client.zcp-qv46266.infosphere.emulab.net
+httpd_hostname=httpd.zcp-qv46266.infosphere.emulab.net
+tomcat_hostname=tomcat.zcp-qv46266.infosphere.emulab.net
+mysql_hostname=mysql.zcp-qv46266.infosphere.emulab.net
+
 
 
 
@@ -44,12 +45,21 @@ setTimeZone(){
 }
 
 copyFiles(){
-   scp -r webapp $master_host:/users/zcp
-   scp install_kubernetes.sh $master_host:/users/zcp
-   scp init_kubernetes.sh $master_host:/users/zcp
-   scp emulab-run_rubbos.sh $master_host:/users/zcp
-   scp collectl.sh $master_host:/users/zcp
-   scp kill_bash.sh $master_host:/users/zcp
+   dst_dir=/tmp
+   rm  webapp.zip
+   zip -r webapp.zip webapp
+   scp webapp.zip $master_host:$dst_dir
+   ssh $master_host "cd $dst_dir; sudo rm -r webapp; unzip webapp.zip"
+
+   scp install_kubernetes.sh $master_host:$dst_dir
+   scp init_kubernetes.sh $master_host:$dst_dir
+   scp emulab-run_rubbos.sh $master_host:$dst_dir
+   scp collectl.sh $master_host:$dst_dir
+   scp kill_bash.sh $master_host:$dst_dir
+   scp git_results.sh $master_host:$dst_dir
+   scp lock_stat.sh $master_host:$dst_dir
+   scp thread_count.sh $master_host:$dst_dir
+   #scp upload_results.sh $master_host:$dst_dir
 }
 
 setTimeZone

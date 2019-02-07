@@ -11,7 +11,8 @@ collectl_net_filename=$4-"`hostname`"
 
 # launch collectl
 nice -n -1 collectl -i 0.1 -F30 -sC -oTm > ${collectl_cpu_filename} &
-nice -n -1 collectl -i 0.1 -F30 -sM -oTm > ${collectl_mem_filename} &
+nice -n -1  collectl -P -sms -i 0.1 -F30 -oTm  > ${collectl_mem_filename} &
+#nice -n -1 collectl -i 0.1 -F30 -sM -oTm > ${collectl_mem_filename} &
 nice -n -1 collectl -i 0.1 -F30 -sD -oTm > ${collectl_disk_filename} &
 nice -n -1 collectl -i 0.1 -F30 -sN -oTm > ${collectl_net_filename} &
 collectl_pid=$!

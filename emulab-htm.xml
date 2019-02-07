@@ -1,0 +1,22 @@
+<rspec xmlns="http://www.protogeni.net/resources/rspec/2" xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.protogeni.net/resources/rspec/2        http://www.protogeni.net/resources/rspec/2/request.xsd" type="request">
+  <rspec_tour xmlns="http://www.protogeni.net/resources/rspec/ext/apt-tour/1"><description type="markdown">Create 3 nodes, httpd, tomcat and mysql, all load a re-compiled kernel which contains lock stats module. A rubbos database is loaded to mysql node and stored at /database directory.</description><instructions type="markdown"/></rspec_tour>
+    <node client_id="httpd" exclusive="true">
+    <sliver_type name="raw-pc">
+      <hardware_type name="d430"/>
+      <disk_image name="urn:publicid:IDN+emulab.net+image+Infosphere//lock_ubuntu16_v2"/>
+    </sliver_type>
+  </node>
+  <node client_id="tomcat" exclusive="true">
+    <sliver_type name="raw-pc">
+      <hardware_type name="d430"/>
+      <disk_image name="urn:publicid:IDN+emulab.net+image+Infosphere//lock_ubuntu16_v2"/>
+    </sliver_type>
+  </node>
+  <node client_id="mysql" exclusive="true">
+    <sliver_type name="raw-pc">
+      <hardware_type name="d430"/>
+      <disk_image name="urn:publicid:IDN+emulab.net+image+Infosphere//lock_ubuntu16_v2"/>
+    </sliver_type>
+    <emulab:blockstore name="b1" class="local" dataset="urn:publicid:IDN+emulab.net:infosphere+imdataset+rubbos_database" mountpoint="/database"/>
+  </node>
+</rspec>

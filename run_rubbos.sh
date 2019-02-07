@@ -9,6 +9,7 @@ execution_dir=/tmp/RUBBoS
 rubbos_client_dir=RUBBoS-Client-current
 run_script=run_rubbos_client.sh
 cur_dir=/home/zcp/emulab
+result_dir=/tmp/results
 
 monitor_dir=/tmp/monitor/
 monitor=collectl.sh
@@ -125,7 +126,7 @@ run(){
 }
 
 transFiles(){
-   dest_dir=/tmp/results/$storage;
+   dest_dir=$result_dir/$storage;
    sshpass -p 123456 ssh root@$result_host "mkdir -p $dest_dir"
    sshpass -p 123456 ssh root@$client_host "sshpass -p 123456 scp -r /tmp/$rubbos_client_dir/bench root@$result_host:$dest_dir";
    sshpass -p 123456 ssh root@$httpd_host  "sshpass -p 123456 scp -r /tmp/httpd-conf root@$result_host:$dest_dir";
@@ -162,6 +163,11 @@ update_workload(){
   
 }
 
+uploadResults(){
+   cd  $cur_dir; cd ..
+   cp git_results.sh $result_dir
+   ./git_results.sh
+}
 
 namespace=$1
 #transFiles
@@ -171,7 +177,8 @@ test(){
    for mode in browse_only mix; do
       #for property in rubbos.properties_100 rubbos.properties_200 rubbos.properties_400 rubbos.properties_600 rubbos.properties_800; do
       for property in rubbos.properties_100; do
-         storage=$mode-$property
+         DATE=`date '+%Y-%m-%d %H:%M:%S'`
+         storage=$mode-$property-$DATE
          workload_mode=$mode
          workload_property=$property
          update_workload
@@ -185,6 +192,7 @@ test(){
          delRCSVC
       done
    done
+   uploadResults
 }
 
 test

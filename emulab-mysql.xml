@@ -2,9 +2,9 @@
   <rspec_tour xmlns="http://www.protogeni.net/resources/rspec/ext/apt-tour/1"><description type="markdown">A node with a blockstore that is loaded from an image backed dataset. The dataset is your private copy, you can change it as needed. </description><instructions type="markdown">After you log in, cd into /mydata and use it. The data will be retained across reboots, but any changes you make will be lost when you terminate your experiment. If you want to save a new copy of your data after modification, go to the Actions dropdown menu above and choose List Datasets. Find the dataset, click through and then click on Snapshot.</instructions></rspec_tour>
   <node client_id="mysql" exclusive="true">
     <sliver_type name="raw-pc">
-      <hardware_type name="pc3000"/>
-      <disk_image name="urn:publicid:IDN+emulab.net+image+Infosphere:rubbos-image-base"/>
-   </sliver_type>
-   <emulab:blockstore name="b1" class="local" dataset="urn:publicid:IDN+emulab.net:infosphere+imdataset+rubbos_database" mountpoint="/mydata"/>
+      <hardware_type name="d430"/>
+      <disk_image name="urn:publicid:IDN+emulab.net+image+Infosphere//lock_ubuntu16_v2"/>
+    </sliver_type>
+    <emulab:blockstore name="b1" class="local" dataset="urn:publicid:IDN+emulab.net:infosphere+imdataset+rubbos_database" mountpoint="/database"/>
   </node>
 </rspec>

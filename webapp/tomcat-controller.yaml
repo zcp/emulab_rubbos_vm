@@ -15,10 +15,10 @@ spec:
        #- image: myregistry.local:5000/tomcat-rubbos:latest
        - image: docker.io/wuqingzcp/rubbos-webapp:tomcat
          name: tomcat
-         resources:
-           limits:
-             cpu: "1"
-             memory: 1Gi
+         #resources:
+         #  limits:
+         #    cpu: "1"
+         #    memory: 1Gi
          ports:
          - containerPort: 8080
          #- containerPort: 8009
@@ -28,6 +28,9 @@ spec:
          - name: MYSQL_SERVICE_PORT
            value: '3306'
          volumeMounts:
+           - name: tomcat-conf
+             mountPath: /usr/local/tomcat/conf/server.xml
+             subPath: server.xml
            - name: tomcat-logs
              mountPath: /usr/local/tomcat/logs
            - name: rubbos-server
@@ -52,3 +55,6 @@ spec:
          - name: tomcat-logs
            hostPath:
              path: /tmp/tomcat-logs
+         - name: tomcat-conf
+           hostPath:
+             path: /tmp/tomcat-conf

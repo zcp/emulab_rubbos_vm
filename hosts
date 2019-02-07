@@ -10,8 +10,8 @@ ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 
 
-155.98.39.65 master.zcp-qv45096.infosphere.emulab.net
-155.98.39.153 httpd.zcp-qv45096.infosphere.emulab.net
-155.98.39.122 tomcat.zcp-qv45096.infosphere.emulab.net
-155.98.39.78 mysql.zcp-qv45096.infosphere.emulab.net
-155.98.39.145 client.zcp-qv45096.infosphere.emulab.net
+155.98.39.109 master.zcp-qv46266.infosphere.emulab.net
+155.98.39.96 httpd.zcp-qv46266.infosphere.emulab.net
+155.98.39.100 tomcat.zcp-qv46266.infosphere.emulab.net
+155.98.39.111 mysql.zcp-qv46266.infosphere.emulab.net
+155.98.39.101 client.zcp-qv46266.infosphere.emulab.net

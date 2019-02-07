@@ -24,12 +24,21 @@ setTimeZone(){
 }
 
 copyFiles(){
-   scp -r webapp $master_host:/users/zcp
-   scp install_kubernetes.sh $master_host:/users/zcp
-   scp init_kubernetes.sh $master_host:/users/zcp
-   scp emulab-run_rubbos.sh $master_host:/users/zcp
-   scp collectl.sh $master_host:/users/zcp
-   scp kill_bash.sh $master_host:/users/zcp
+   dst_dir=/tmp
+   rm  webapp.zip
+   zip -r webapp.zip webapp
+   scp webapp.zip $master_host:$dst_dir
+   ssh $master_host "cd $dst_dir; sudo rm -r webapp; unzip webapp.zip"
+
+   scp install_kubernetes.sh $master_host:$dst_dir
+   scp init_kubernetes.sh $master_host:$dst_dir
+   scp emulab-run_rubbos.sh $master_host:$dst_dir
+   scp collectl.sh $master_host:$dst_dir
+   scp kill_bash.sh $master_host:$dst_dir
+   scp git_results.sh $master_host:$dst_dir
+   scp lock_stat.sh $master_host:$dst_dir
+   scp thread_count.sh $master_host:$dst_dir
+   #scp upload_results.sh $master_host:$dst_dir
 }
 
 setTimeZone

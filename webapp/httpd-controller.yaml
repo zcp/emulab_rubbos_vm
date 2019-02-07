@@ -15,10 +15,10 @@ spec:
         #- image: myregistry.local:5000/httpd:latest
         - image: docker.io/wuqingzcp/rubbos-webapp:emulab-httpd
           name: httpd
-          resources:
-            limits:
-              cpu: "0.25"
-              memory: 1Gi
+          #resources:
+          #  limits:
+          #    cpu: "0.25"
+          #    memory: 1Gi
           ports:
           - containerPort: 80
           volumeMounts:

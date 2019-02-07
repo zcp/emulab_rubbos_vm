@@ -14,5 +14,9 @@ master=192.168.110.2
 #    sshpass -p $password ssh root@$remote_server "echo $public_key > /root/.ssh/authorized_keys"
 #done
 
+mkdir -p ~/.ssh     
+echo "Host *" > ~/.ssh/config     
+echo " StrictHostKeyChecking no" >> ~/.ssh/config
+
 cd /tmp/RUBBoS;
 make emulator

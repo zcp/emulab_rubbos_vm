@@ -66,7 +66,8 @@ stime_epoch = time.mktime(time.strptime(startTime, '%Y%m%d%H%M'))
 etime_epoch = time.mktime(time.strptime(endTime, '%Y%m%d%H%M')) + 59.999999
 
 # The number of time windows in 1 sec.
-multi_count_in_sec = 20
+#multi_count_in_sec = 20
+multi_count_in_sec = 10
 #--------------------------------------------------------------------------------
 
 # initialize dictionaries

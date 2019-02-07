@@ -1,6 +1,6 @@
 # HTTP server information
 #generatring url will use the following parameter
-httpd_hostname=155.98.39.153
+httpd_hostname=155.98.39.96
 httpd_port = 31102
 
 # C/JDBC server to monitor (if any)
@@ -15,7 +15,7 @@ ejb_html_path =
 ejb_script_path =
 
 # Servlets server information
-servlets_server=155.98.39.153
+servlets_server=155.98.39.96
 servlets_html_path = /rubbos
 servlets_script_path = /rubbos/servlet
 
@@ -24,10 +24,10 @@ php_html_path = /PHP
 php_script_path = /PHP
 
 #Database information
-database_master_server=155.98.39.78
-database_slave_servers=155.98.39.78
+database_master_server=155.98.39.111
+database_slave_servers=155.98.39.111
 # Workload: precise which transition table to use
-workload_remote_client_nodes=155.98.39.145
+workload_remote_client_nodes=155.98.39.101
 workload_remote_client_command = java -classpath .:/tmp/RUBBoS/Client/:/tmp/RUBBoS/Client/rubbos_client.jar -Xms128m -Xmx1024m -Dhttp.keepAlive=true -Dhttp.maxConnections=1000000 edu.rice.rubbos.client.ClientEmulator
 
 
