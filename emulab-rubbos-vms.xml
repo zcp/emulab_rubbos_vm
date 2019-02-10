@@ -1,0 +1,52 @@
+<rspec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jacks="http://www.protogeni.net/resources/rspec/ext/jacks/1" xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1" xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns="http://www.geni.net/resources/rspec/3" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd" type="request">
+  <rspec_tour xmlns="http://www.protogeni.net/resources/rspec/ext/apt-tour/1">
+    <description type="markdown">Run rubbos on VMs.</description>
+    <instructions type="markdown">Wait for the profile instance to start, and then log in to either VM via the
+ssh ports specified below.
+</instructions>
+  </rspec_tour>
+  <node client_id="client" exclusive="false">
+    <sliver_type name="emulab-xen">
+       <disk_image name="urn:publicid:IDN+emulab.net+image+Infosphere//lock_ubuntu16_v2"/>
+       <emulab:xen cores="4" ram="4096"/>
+    </sliver_type>
+    <interface client_id="client:if0" component_id="eth0">
+       <ip address="192.168.1.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <node client_id="httpd" exclusive="false">
+    <sliver_type name="emulab-xen">
+       <disk_image name="urn:publicid:IDN+emulab.net+image+Infosphere//lock_ubuntu16_v2"/>
+       <emulab:xen cores="4" ram="4096"/>
+    </sliver_type>
+    <interface client_id="httpd:if0" component_id="eth0">
+       <ip address="192.168.1.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <node client_id="tomcat" exclusive="false">
+    <sliver_type name="emulab-xen">
+       <disk_image name="urn:publicid:IDN+emulab.net+image+Infosphere//lock_ubuntu16_v2"/>
+       <emulab:xen cores="4" ram="4096"/>
+    </sliver_type>
+    <interface client_id="tomcat:if0" component_id="eth0">
+       <ip address="192.168.1.3" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <node client_id="mysql" exclusive="false">
+    <sliver_type name="emulab-xen">
+       <disk_image name="urn:publicid:IDN+emulab.net+image+Infosphere//lock_ubuntu16_v2"/>
+       <emulab:xen cores="4" ram="4096"/>
+    </sliver_type>
+    <emulab:blockstore name="b1" class="local" dataset="urn:publicid:IDN+emulab.net:infosphere+imdataset+rubbos_database" mountpoint="/database"/>
+    <interface client_id="mysql:if0" component_id="eth0">
+       <ip address="192.168.1.4" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+  </node>
+  <link client_id="link-1">
+    <interface_ref client_id="client:if0"/>
+    <interface_ref client_id="httpd:if0"/>
+    <interface_ref client_id="tomcat:if0"/>
+    <interface_ref client_id="mysql:if0"/>
+    <link_type name="rubbos-lan"/>
+  </link>
+</rspec>

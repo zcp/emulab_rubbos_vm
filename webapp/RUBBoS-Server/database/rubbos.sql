@@ -27,7 +27,7 @@ UPDATE users SET id=0 WHERE nickname="Anonymous Coward";
 
 CREATE TABLE stories (
    id            INTEGER UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
-   title         VARCHAR(100),
+   title         VARCHAR(200),
    body          TEXT,
    date          DATETIME,
    writer        INTEGER UNSIGNED NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE stories (
 
 CREATE TABLE old_stories (
    id            INTEGER UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
-   title         VARCHAR(100),
+   title         VARCHAR(200),
    body          TEXT,
    date          DATETIME,
    writer        INTEGER UNSIGNED NOT NULL,

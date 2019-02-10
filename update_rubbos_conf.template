@@ -3,7 +3,7 @@
 #update mysql.properties of rubbos server
 #mysql_host=xxx.xxx.xxx.xxx
 rubbos_server_conf=/home/zcp/emulab/webapp/RUBBoS-Server/mysql.properties
-sed -i "s/^datasource.url.*/datasource.url   jdbc:mysql:\/\/$mysql_ip:31101\/rubbos/" $rubbos_server_conf
+sed -i "s/^datasource.url.*/datasource.url   jdbc:mysql:\/\/$mysql_ip:3306\/rubbos/" $rubbos_server_conf
 
 #update worker.properties of httpd
 #tomcat_host=$mysql_host
